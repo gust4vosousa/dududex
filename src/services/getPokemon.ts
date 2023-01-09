@@ -1,6 +1,7 @@
 import { PokemonClient } from 'pokenode-ts';
+import { clientOptions } from './clientOptions';
 
-const api = new PokemonClient();
+const httpClient = new PokemonClient(clientOptions);
 
 export const getPokemonByName = async (pokemon: string) =>
-  await api.getPokemonByName(pokemon);
+  await httpClient.getPokemonByName(pokemon);

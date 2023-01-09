@@ -1,35 +1,29 @@
-import { useCallback, useState } from 'react';
-
-import { Typography } from '@mui/material';
-import { Pokemon } from 'pokenode-ts';
+import { Grid, Typography } from '@mui/material';
 import { PokemonCardComponent } from '../../components/PokemonCard/PokemonCardComponent';
-import { SearchComponent } from '../../components/Search/SearchComponent';
-import { getPokemonByName } from '../../services/getPokemon';
-import { HomeScreenContainer } from './HomeScreen.styles';
+import { PokemonListComponent } from '../../components/PokemonList/PokemonListComponent';
+import { HomeScreenRules } from './HomeScreen.rules';
+import { HomeScreenContainer, HomeScreenGrid } from './HomeScreen.styles';
 
 export const HomeScreen: React.FC = () => {
-  const [currentSearch, setCurrentSearch] = useState<string>('');
-  const [searchResult, setSearchResult] = useState<Pokemon>();
-
-  const onSubmit = useCallback(async () => {
-    const data = await getPokemonByName(currentSearch);
-    setSearchResult(data);
-  }, [currentSearch]);
+  const { pokemon, pokemonList, isPokemonBusy, onListItemClick } =
+    HomeScreenRules();
 
   return (
     <HomeScreenContainer>
       <Typography>Dududex</Typography>
 
-      <SearchComponent
-        fullWidth
-        label='Busque pelo nome do Pokémon'
-        placeholder='Pokémon'
-        value={currentSearch}
-        onChange={(value) => setCurrentSearch(value)}
-        onSubmit={onSubmit}
-      />
+      <HomeScreenGrid container spacing={4}>
+        <Grid item xs={4}>
+          <PokemonListComponent
+            list={pokemonList ?? []}
+            onClick={onListItemClick}
+          />
+        </Grid>
 
-      {searchResult && <PokemonCardComponent pokemon={searchResult} />}
+        <Grid item xs={8}>
+          <PokemonCardComponent pokemon={pokemon} isBusy={isPokemonBusy} />
+        </Grid>
+      </HomeScreenGrid>
     </HomeScreenContainer>
   );
 };

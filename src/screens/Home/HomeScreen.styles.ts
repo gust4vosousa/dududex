@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { styled } from '../../theme/theme';
 
 export const HomeScreenContainer = styled(Box)(({ theme }) => ({
@@ -12,3 +12,8 @@ export const HomeScreenContainer = styled(Box)(({ theme }) => ({
   alignItems: 'center',
   gap: 32
 }));
+
+export const HomeScreenGrid = styled(Grid)({
+  padding: 16,
+  width: '100%'
+});
