@@ -1,9 +1,11 @@
-import { EType } from '../../@types/TypeEntity.types';
+import { PokemonType } from 'pokenode-ts';
 
 export interface ITypeBadgeProps {
-  type: EType;
+  types: PokemonType[];
 }
 
-export interface ITypeBadgeStyle {
+export interface ITypeBadgeStyles {
   color: string;
+  isFirst: boolean;
+  isMonoType: boolean;
 }

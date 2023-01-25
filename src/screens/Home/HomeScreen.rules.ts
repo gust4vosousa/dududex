@@ -1,62 +1,52 @@
 import { Pokedexes } from 'pokenode-ts';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { ERequestStatus } from '../../@types/RequestStatus.types';
-import { getPokedexById } from '../../services/getPokedex';
-import { getPokemonByName } from '../../services/getPokemon';
-import {
-  selectPokemon,
-  selectPokemonStatus
-} from '../../store/pokemon/pokemonSelectors';
-import {
-  setPokemon,
-  setPokemonRequestStatus
-} from '../../store/pokemon/pokemonSlice';
+import { selectPokedex } from '../../store/pokedex/pokedexSelectors';
+import { fetchPokedexById } from '../../store/pokedex/pokedexThunks';
+import { selectPokemon } from '../../store/pokemon/pokemonSelectors';
+import { fetchPokemonByName } from '../../store/pokemon/pokemonThunks';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 
-export const HomeScreenRules = () => {
-  const [pokemonList, setPokemonList] = useState<string[]>();
-
+export const useHomeScreenRules = () => {
   const dispatch = useAppDispatch();
 
   const pokemon = useAppSelector(selectPokemon);
-  const pokemonStatus = useAppSelector(selectPokemonStatus);
+  const pokedex = useAppSelector(selectPokedex);
 
-  const isPokemonBusy = useMemo(
-    () => pokemonStatus === ERequestStatus.busy,
-    [pokemonStatus]
+  const pokemonList = useMemo(
+    () =>
+      pokedex.data?.pokemon_entries.map((entry) => entry.pokemon_species.name),
+    [pokedex.data]
   );
 
-  const onListItemClick = useCallback(
-    async (pokemonName: string) => {
-      dispatch(setPokemonRequestStatus(ERequestStatus.busy));
+  const isPokemonBusy = useMemo(
+    () => pokemon.status === ERequestStatus.busy,
+    [pokemon]
+  );
 
-      try {
-        const data = await getPokemonByName(pokemonName);
-        dispatch(setPokemon(data));
-        dispatch(setPokemonRequestStatus(ERequestStatus.success));
-      } catch (error) {
-        console.log(error);
-        dispatch(setPokemonRequestStatus(ERequestStatus.failure));
+  const isPokedexBusy = useMemo(
+    () => pokedex.status === ERequestStatus.busy,
+    [pokedex]
+  );
+
+  const onPokemonSearch = useCallback(
+    (pokemonName: string) => {
+      if (pokemonName) {
+        dispatch(fetchPokemonByName(pokemonName));
       }
     },
     [dispatch]
   );
 
-  const getPokemonList = useCallback(async () => {
-    const data = await getPokedexById(Pokedexes.NATIONAL);
-    setPokemonList(
-      data?.pokemon_entries.map((entry) => entry.pokemon_species.name)
-    );
-  }, []);
-
   useEffect(() => {
-    getPokemonList();
-  }, [getPokemonList]);
+    dispatch(fetchPokedexById(Pokedexes.NATIONAL));
+  }, [dispatch]);
 
   return {
-    pokemon,
+    pokemon: pokemon.data,
     pokemonList,
     isPokemonBusy,
-    onListItemClick
+    isPokedexBusy,
+    onPokemonSearch
   };
 };

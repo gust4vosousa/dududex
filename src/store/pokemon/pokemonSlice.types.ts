@@ -5,3 +5,7 @@ export interface IPokemonState {
   data?: Pokemon;
   status: ERequestStatus;
 }
+
+export enum EPokemonActionTypes {
+  fetchByName = 'pokemon/fetchByName'
+}

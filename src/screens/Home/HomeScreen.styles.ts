@@ -6,11 +6,10 @@ export const HomeScreenContainer = styled(Box)(({ theme }) => ({
   color: theme.palette.text.white,
   minHeight: '100vh',
   height: '100%',
-  paddingHorizontal: 32,
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  gap: 32
+  gap: 16
 }));
 
 export const HomeScreenGrid = styled(Grid)({

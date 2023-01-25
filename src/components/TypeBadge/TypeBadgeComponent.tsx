@@ -1,14 +1,24 @@
-import { Typography } from '@mui/material';
-import { useBadgeColorHook } from '../../hooks/badgeColor/useBadgeColorHook';
-import { TypeBadge } from './TypeBadgeComponent.styles';
+import React from 'react';
+import { EType } from '../../@types/TypeEntity.types';
+import { useTypeBadgeComponentRules } from './TypeBadgeComponent.rules';
+import { TypeBadge, TypeBadgeContainer } from './TypeBadgeComponent.styles';
 import { ITypeBadgeProps } from './TypeBadgeComponent.types';
 
-export const TypeBadgeComponent: React.FC<ITypeBadgeProps> = ({ type }) => {
-  const color = useBadgeColorHook(type);
+export const TypeBadgeComponent: React.FC<ITypeBadgeProps> = ({ types }) => {
+  const { getColor } = useTypeBadgeComponentRules();
 
   return (
-    <TypeBadge color={color} elevation={3}>
-      <Typography>{type.toUpperCase()}</Typography>
-    </TypeBadge>
+    <TypeBadgeContainer>
+      {types.map(({ type }, index) => (
+        <TypeBadge
+          key={index}
+          color={getColor(type.name as EType)}
+          isFirst={index === 0 ? true : false}
+          isMonoType={types.length <= 1}
+        >
+          {type.name.toUpperCase()}
+        </TypeBadge>
+      ))}
+    </TypeBadgeContainer>
   );
 };
