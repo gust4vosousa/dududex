@@ -1,3 +1,4 @@
+import WarningIcon from '@mui/icons-material/Warning';
 import { Box, CircularProgress, Grid } from '@mui/material';
 import { firstLetterUpperCaseUtil } from '../../utils/formatUtils';
 import { SpriteComponent } from '../Sprite/SpriteComponent';
@@ -12,15 +13,35 @@ export const PokemonCardComponent: React.FC<IPokemonCardProps> = ({
 }) => {
   return (
     <PokemonCard>
-      {!pokemon && !isBusy && 'Select a Pokémon to display its information'}
+      {!pokemon && !isBusy && (
+        <Box
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: 8,
+            fontSize: 18
+          }}
+        >
+          <WarningIcon />
+          {'Select a Pokémon to display its information'}
+        </Box>
+      )}
 
       {pokemon && !isBusy && (
         <>
-          <Grid container>
+          <Grid
+            container
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
             <Grid
               item
-              md={12}
-              lg={6}
+              sm={12}
+              md={6}
               style={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -33,7 +54,7 @@ export const PokemonCardComponent: React.FC<IPokemonCardProps> = ({
               <TypeBadgeComponent types={pokemon.types} />
               <SpriteComponent sprites={pokemon.sprites} />
             </Grid>
-            <Grid item md={12} lg={6}>
+            <Grid item sm={12} md={6}>
               <StatsTableComponent statsList={pokemon.stats} />
             </Grid>
           </Grid>

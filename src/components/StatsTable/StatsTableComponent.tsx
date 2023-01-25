@@ -1,14 +1,17 @@
 import { Box } from '@mui/material';
 import { blue, green, orange, red, yellow } from '@mui/material/colors';
 import { useCallback } from 'react';
-import { firstLetterUpperCaseUtil } from '../../utils/formatUtils';
 import {
   StatBar,
   StatBarContainer,
   StatLabel,
   StatsTableContainer
 } from './StatsTableComponent.styles';
-import { EStatRanges, IStatsTableProps } from './StatsTableComponent.types';
+import {
+  EStatNames,
+  EStatRanges,
+  IStatsTableProps
+} from './StatsTableComponent.types';
 
 export const StatsTableComponent: React.FC<IStatsTableProps> = ({
   statsList
@@ -38,6 +41,19 @@ export const StatsTableComponent: React.FC<IStatsTableProps> = ({
     return color[range()];
   }, []);
 
+  const formatStatName = (statName: EStatNames) => {
+    const name = {
+      [EStatNames.attack]: 'Attack',
+      [EStatNames.defense]: 'Defense',
+      [EStatNames.speed]: 'Speed',
+      [EStatNames.hp]: 'Hp',
+      [EStatNames.specialAttack]: 'Sp. Attack',
+      [EStatNames.specialDefense]: 'Sp. Defense'
+    };
+
+    return name[statName];
+  };
+
   return (
     <StatsTableContainer>
       <Box fontSize={32} textAlign='center'>
@@ -46,7 +62,7 @@ export const StatsTableComponent: React.FC<IStatsTableProps> = ({
       {statsList.map((stat, index) => (
         <StatBarContainer key={index}>
           <StatLabel type='name'>
-            {firstLetterUpperCaseUtil(stat.stat.name)}
+            {formatStatName(stat.stat.name as EStatNames)}
           </StatLabel>
           <StatLabel type='value'>{stat.base_stat}</StatLabel>
           <StatBar value={stat.base_stat} color={getColor(stat.base_stat)} />

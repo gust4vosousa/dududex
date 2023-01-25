@@ -1,18 +1,22 @@
-import { Autocomplete } from '@mui/material';
-import { styled } from '../../theme/theme';
+import { Autocomplete, styled } from '@mui/material';
 
 export const StyledAutocomplete = styled(Autocomplete)({
+  minWidth: 200,
+
   '& .MuiAutocomplete-inputRoot': {
     color: 'white'
   },
   '& .MuiOutlinedInput-notchedOutline': {
-    borderColor: 'white'
+    borderColor: 'white',
+    borderRadius: 8
   },
   '&:hover .MuiOutlinedInput-notchedOutline': {
-    borderColor: 'white'
+    borderColor: 'white',
+    borderRadius: 8
   },
   '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-    borderColor: 'white'
+    borderColor: 'white',
+    borderRadius: 8
   },
   '& .MuiInputLabel-outlined': {
     color: 'white'

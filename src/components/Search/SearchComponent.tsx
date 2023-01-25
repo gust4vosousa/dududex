@@ -1,6 +1,5 @@
 import { Button, TextField } from '@mui/material';
 import React from 'react';
-import { theme } from '../../theme/theme';
 import { SearchComponentContainer } from './SearchComponent.styles';
 import { ISearchProps } from './SearchComponent.types';
 
@@ -22,12 +21,12 @@ export const SearchComponent: React.FC<ISearchProps> = ({
         value={value}
         inputProps={{
           style: {
-            color: `${theme.palette.text.white}`
+            color: 'white'
           }
         }}
         InputLabelProps={{
           style: {
-            color: `${theme.palette.text.white}`
+            color: 'white'
           }
         }}
         onKeyUp={(event) => {

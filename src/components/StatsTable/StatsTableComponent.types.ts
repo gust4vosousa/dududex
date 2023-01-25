@@ -20,3 +20,12 @@ export enum EStatRanges {
   good,
   excellent
 }
+
+export enum EStatNames {
+  hp = 'hp',
+  attack = 'attack',
+  defense = 'defense',
+  speed = 'speed',
+  specialAttack = 'special-attack',
+  specialDefense = 'special-defense'
+}

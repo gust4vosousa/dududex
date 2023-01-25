@@ -1,10 +1,9 @@
-import { Box } from '@material-ui/core';
-import { styled } from '../../theme/theme';
+import { Box, styled } from '@material-ui/core';
+import { colors } from '../../theme/colors';
 
-export const PokemonCard = styled(Box)(({ theme }) => ({
-  color: theme.palette.text.white,
-  backgroundColor: theme.palette.background.main,
-  borderRadius: 20,
-  padding: 16,
-  paddingBottom: 32
-}));
+export const PokemonCard = styled(Box)({
+  color: 'white',
+  backgroundColor: colors.background.main,
+  borderRadius: 8,
+  padding: 16
+});

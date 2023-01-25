@@ -1,5 +1,4 @@
-import { Box } from '@mui/material';
-import { styled } from '../../theme/theme';
+import { Box, styled } from '@mui/material';
 
 export const SearchComponentContainer = styled(Box)({
   display: 'flex',

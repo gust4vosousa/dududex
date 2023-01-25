@@ -1,5 +1,4 @@
-import { Box } from '@mui/material';
-import { styled } from '../../theme/theme';
+import { Box, styled } from '@mui/material';
 import { ITypeBadgeStyles } from './TypeBadgeComponent.types';
 
 export const TypeBadgeContainer = styled(Box)({
@@ -9,12 +8,12 @@ export const TypeBadgeContainer = styled(Box)({
 });
 
 export const TypeBadge = styled(Box)<ITypeBadgeStyles>(
-  ({ theme, color, isFirst, isMonoType }) => ({
+  ({ color, isFirst, isMonoType }) => ({
     minWidth: 100,
     minHeight: 24,
     padding: 4,
     backgroundColor: color,
-    color: theme.palette.text.white,
+    color: 'white',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

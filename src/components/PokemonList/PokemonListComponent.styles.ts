@@ -1,7 +1,7 @@
-import { Paper } from '@mui/material';
-import { styled } from '../../theme/theme';
+import { Paper, styled } from '@mui/material';
+import { colors } from '../../theme/colors';
 
-export const ListCard = styled(Paper)(({ theme }) => ({
+export const ListCard = styled(Paper)({
   padding: 8,
   display: 'flex',
   flexDirection: 'row',
@@ -9,16 +9,16 @@ export const ListCard = styled(Paper)(({ theme }) => ({
   gap: 8,
   width: '100%',
   '&:hover': {
-    backgroundColor: theme.palette.primary.main
+    backgroundColor: colors.primary.main
   }
-}));
+});
 
-export const ListContainer = styled(Paper)(({ theme }) => ({
+export const ListContainer = styled(Paper)({
   display: 'flex',
   flexDirection: 'column',
   gap: 8,
   padding: 16,
   maxHeight: '100vh',
   overFlowY: 'scroll',
-  backgroundColor: theme.palette.background.main
-}));
+  backgroundColor: colors.background.main
+});
