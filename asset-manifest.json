@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/dududex/static/css/main.e6c13ad2.css",
+    "main.js": "/dududex/static/js/main.cb4a260f.js",
+    "index.html": "/dududex/index.html",
+    "main.e6c13ad2.css.map": "/dududex/static/css/main.e6c13ad2.css.map",
+    "main.cb4a260f.js.map": "/dududex/static/js/main.cb4a260f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.cb4a260f.js"
+  ]
+}
