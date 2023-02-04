@@ -3,6 +3,7 @@ import {
   blueGrey,
   deepOrange,
   green,
+  grey,
   lightGreen,
   orange,
   red,
@@ -54,5 +55,10 @@ export const colors = {
     rock: '#B6A136',
     steel: '#B7B7CE',
     water: '#6390F0'
+  },
+  text: {
+    primary: 'white',
+    secondary: grey['A400'],
+    tertiary: ''
   }
 };

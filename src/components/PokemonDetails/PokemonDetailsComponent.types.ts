@@ -1,6 +1,6 @@
 import { Pokemon } from 'pokenode-ts';
 
-export interface IPokemonCardProps {
+export interface IPokemonDetailsProps {
   pokemon?: Pokemon;
   isBusy: boolean;
 }

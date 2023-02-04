@@ -17,6 +17,9 @@ export const pokedexSlice = createSlice({
     builder.addCase(fetchPokedexById.pending, (state) => {
       state.status = ERequestStatus.busy;
     });
+    builder.addCase(fetchPokedexById.rejected, (state) => {
+      state.status = ERequestStatus.failure;
+    });
   }
 });
 

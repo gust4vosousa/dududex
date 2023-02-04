@@ -7,14 +7,14 @@ import {
   SpriteContainer,
   SpriteWrapper
 } from './SpriteComponent.styles';
-import { ISpriteProps } from './SpriteComponent.types';
+import { ESpriteModes, ISpriteProps } from './SpriteComponent.types';
 
 export const SpriteComponent: React.FC<ISpriteProps> = ({ sprites }) => {
   const [isShiny, setIsShiny] = useState<boolean>(false);
   const [showBackSprite, setShowBackSprite] = useState<boolean>(false);
 
   const getSprite = useCallback(
-    (mode: 'front' | 'back') => {
+    (mode: ESpriteModes) => {
       const images = {
         back: isShiny ? sprites.back_shiny : sprites.back_default,
         front: isShiny ? sprites.front_shiny : sprites.front_default
@@ -31,7 +31,7 @@ export const SpriteComponent: React.FC<ISpriteProps> = ({ sprites }) => {
   );
 
   const currentSprite = useMemo(
-    () => getSprite(showBackSprite ? 'back' : 'front'),
+    () => getSprite(showBackSprite ? ESpriteModes.back : ESpriteModes.front),
     [getSprite, showBackSprite]
   );
 

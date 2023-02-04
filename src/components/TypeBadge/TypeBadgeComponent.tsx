@@ -1,5 +1,5 @@
 import React from 'react';
-import { EType } from '../../@types/TypeEntity.types';
+import { EType } from '../../@types/Entities.types';
 import { getTypeColorUtil } from '../../utils/color/colorUtils';
 import { TypeBadge, TypeBadgeContainer } from './TypeBadgeComponent.styles';
 import { ITypeBadgeProps } from './TypeBadgeComponent.types';

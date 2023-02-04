@@ -15,3 +15,6 @@ export const formatStatNameUtil = (statName: EStatNames) => {
 
   return name[statName];
 };
+
+export const formatPokemonEntryUtil = (id: number, name: string) =>
+  `#${id} ${firstLetterUpperCaseUtil(name)}`;

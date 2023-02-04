@@ -1,4 +1,4 @@
-import { EType } from '../../@types/TypeEntity.types';
+import { EType } from '../../@types/Entities.types';
 import { colors } from '../../theme/colors';
 import { EStatRanges } from './colorUtils.types';
 

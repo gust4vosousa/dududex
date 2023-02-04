@@ -1,44 +1,41 @@
-import { Box, Grid } from '@mui/material';
-import { PokemonCardComponent } from '../../components/PokemonCard/PokemonCardComponent';
-import { SelectComponent } from '../../components/SelectPokemon/SelectPokemonComponent';
-import { useHomeScreenRules } from './HomeScreen.rules';
+import { Box } from '@mui/material';
+import { Pokedexes } from 'pokenode-ts';
+import { useEffect, useMemo } from 'react';
+import { ERequestStatus } from '../../@types/RequestStatus.types';
+import { PokemonDetailsComponent } from '../../components/PokemonDetails/PokemonDetailsComponent';
+import { fetchPokedexById } from '../../store/pokedex/pokedexThunks';
+import {
+  selectPokemonData,
+  selectPokemonRequestStatus
+} from '../../store/pokemon/pokemonSelectors';
+import { useAppDispatch, useAppSelector } from '../../store/store';
 import {
   HomeScreenContainer,
-  HomeScreenGrid,
-  SearchContainer
+  PokemonDetailsComponentContainer
 } from './HomeScreen.styles';
 
 export const HomeScreen: React.FC = () => {
-  const {
-    pokemon,
-    pokemonList,
-    isPokemonBusy,
-    isPokedexBusy,
-    onPokemonSearch
-  } = useHomeScreenRules();
+  const dispatch = useAppDispatch();
+
+  const pokemonData = useAppSelector(selectPokemonData);
+  const pokemonRequestStatus = useAppSelector(selectPokemonRequestStatus);
+
+  const isPokemonBusy = useMemo(
+    () => pokemonRequestStatus === ERequestStatus.busy,
+    [pokemonRequestStatus]
+  );
+
+  useEffect(() => {
+    dispatch(fetchPokedexById(Pokedexes.NATIONAL));
+  }, [dispatch]);
 
   return (
     <HomeScreenContainer>
-      <Box fontSize={64}>Dududex</Box>
+      <PokemonDetailsComponentContainer>
+        <PokemonDetailsComponent pokemon={pokemonData} isBusy={isPokemonBusy} />
+      </PokemonDetailsComponentContainer>
+
       <Box fontSize={10}>{`v${process.env.REACT_APP_VERSION}`}</Box>
-
-      <HomeScreenGrid container spacing={4}>
-        <Grid item xs={12}>
-          <SearchContainer>
-            <SelectComponent
-              options={pokemonList ?? []}
-              label='Pokémon'
-              value={pokemon?.name}
-              onChange={onPokemonSearch}
-              loading={isPokedexBusy}
-            />
-          </SearchContainer>
-        </Grid>
-
-        <Grid item xs={12}>
-          <PokemonCardComponent pokemon={pokemon} isBusy={isPokemonBusy} />
-        </Grid>
-      </HomeScreenGrid>
     </HomeScreenContainer>
   );
 };

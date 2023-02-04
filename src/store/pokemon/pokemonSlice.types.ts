@@ -6,6 +6,12 @@ export interface IPokemonState {
   status: ERequestStatus;
 }
 
+export interface IPokemonListItem {
+  label: string;
+  id: number;
+}
+
 export enum EPokemonActionTypes {
-  fetchByName = 'pokemon/fetchByName'
+  fetchByName = 'pokemon/fetchByName',
+  fetchById = 'pokemon/fetchById'
 }
