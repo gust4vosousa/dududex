@@ -31,9 +31,9 @@ export const SelectComponent: React.FC<ISelectPokemonProps> = ({
         getOptionLabel={(option: any) =>
           `#${option.id} ${firstLetterUpperCaseUtil(option.label)}`
         }
-        renderInput={(params) => renderCustomInput(params)}
         loading={loading}
         disabled={loading}
+        renderInput={(params) => renderCustomInput(params)}
       />
     </SelectContainer>
   );

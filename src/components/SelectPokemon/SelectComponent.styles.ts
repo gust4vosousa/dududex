@@ -8,29 +8,25 @@ export const SelectContainer = styled(Box)({
 
 export const StyledAutocomplete = styled(Autocomplete)({
   minWidth: 300,
-
   '& .MuiAutocomplete-inputRoot': {
     color: 'white'
   },
   '& .MuiOutlinedInput-notchedOutline': {
-    borderColor: 'white',
-    borderRadius: 8
-  },
-  '&:hover .MuiOutlinedInput-notchedOutline': {
-    borderColor: 'white',
-    borderRadius: 8
-  },
-  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-    borderColor: 'white',
-    borderRadius: 8
+    borderColor: 'white'
   },
   '& .MuiInputLabel-outlined': {
     color: 'white'
   },
-  '&.Mui-focused .MuiInputLabel-outlined': {
+  '& .MuiSvgIcon-root': {
     color: 'white'
   },
   '& .Mui-focused .MuiOutlinedInput-notchedOutline': {
+    borderColor: 'white'
+  },
+  '& .Mui-focused .MuiInputLabel-outlined': {
+    color: 'white'
+  },
+  '&:hover .MuiOutlinedInput-notchedOutline': {
     borderColor: 'white'
   }
 });
