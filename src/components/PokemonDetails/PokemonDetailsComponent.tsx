@@ -19,7 +19,7 @@ export const PokemonDetailsComponent: React.FC<IPokemonDetailsProps> = ({
   <PokemonDetailsCard>
     {!pokemon && !isBusy && (
       <Fragment>
-        <WarningIcon />
+        <WarningIcon fontSize='large' />
         {
           'Nothing to show yet. Please, select a Pokémon to display its information'
         }

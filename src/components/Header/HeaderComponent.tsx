@@ -1,7 +1,14 @@
+import CompareIcon from '@mui/icons-material/Compare';
+import HomeIcon from '@mui/icons-material/Home';
 import logo from '../../assets/icons/pokeball48.png';
 import { SelectComponent } from '../SelectPokemon/SelectPokemonComponent';
 import { useHeaderComponentRules } from './HeaderComponent.rules';
-import { HeaderContainer, TitleContainer } from './HeaderComponent.styles';
+import {
+  HeaderContainer,
+  NavButtonsContainer,
+  NavItem,
+  TitleContainer
+} from './HeaderComponent.styles';
 import { EHeaderModes, IHeaderProps } from './HeaderComponent.types';
 
 export const HeaderComponent: React.FC<IHeaderProps> = ({ mode }) => {
@@ -10,10 +17,22 @@ export const HeaderComponent: React.FC<IHeaderProps> = ({ mode }) => {
 
   return (
     <HeaderContainer>
-      <TitleContainer to='/'>
+      <TitleContainer>
         <img src={logo} alt='Logo' />
         Dududex
       </TitleContainer>
+
+      <NavButtonsContainer>
+        <NavItem to='/' color='inherit'>
+          <HomeIcon />
+          Home
+        </NavItem>
+
+        <NavItem to='/compare'>
+          <CompareIcon />
+          Compare
+        </NavItem>
+      </NavButtonsContainer>
 
       {mode === EHeaderModes.home && (
         <SelectComponent
