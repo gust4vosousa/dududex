@@ -1,11 +1,8 @@
 import { Box } from '@material-ui/core';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { useCallback } from 'react';
-import { selectPokemonById } from '../../store/pokemon/pokemonSelectors';
-import { fetchPokemonById } from '../../store/pokemon/pokemonThunks';
-import { useAppDispatch, useAppSelector } from '../../store/store';
 import { firstLetterUpperCaseUtil } from '../../utils/formatUtils';
+import { usePokemonNavigationComponentRules } from './PokemonNavigationComponent.rules';
 import {
   NavigationButton,
   NavigationContainer
@@ -15,35 +12,15 @@ import { IPokemonNavigationProps } from './PokemonNavigationComponent.types';
 export const PokemonNavigationComponent: React.FC<IPokemonNavigationProps> = ({
   currentPokemonId
 }) => {
-  const dispatch = useAppDispatch();
-
-  const onPokemonSearch = useCallback(
-    (pokemonId: number) => {
-      dispatch(fetchPokemonById(pokemonId));
-    },
-    [dispatch]
-  );
-
-  const currentPokemon = useAppSelector((state) =>
-    selectPokemonById(state, currentPokemonId)
-  );
-
-  const previousProkemon = useAppSelector((state) =>
-    selectPokemonById(state, currentPokemonId - 1)
-  );
-
-  const nextPokemon = useAppSelector((state) =>
-    selectPokemonById(state, currentPokemonId + 1)
-  );
+  const { currentPokemon, previousPokemon, nextPokemon, onPokemonSearch } =
+    usePokemonNavigationComponentRules(currentPokemonId);
 
   return (
     <NavigationContainer>
-      {previousProkemon && (
-        <NavigationButton
-          onClick={() => onPokemonSearch(previousProkemon?.id!)}
-        >
-          {`#${previousProkemon.id} ${firstLetterUpperCaseUtil(
-            previousProkemon.label
+      {previousPokemon && (
+        <NavigationButton onClick={() => onPokemonSearch(previousPokemon?.id!)}>
+          {`#${previousPokemon.id} ${firstLetterUpperCaseUtil(
+            previousPokemon.label
           )}`}
           <ArrowBackIosNewIcon />
         </NavigationButton>

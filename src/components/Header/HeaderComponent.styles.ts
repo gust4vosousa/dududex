@@ -1,4 +1,5 @@
-import { AppBar, Box, styled } from '@material-ui/core';
+import { AppBar, styled } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import { colors } from '../../theme/colors';
 
 export const HeaderContainer = styled(AppBar)({
@@ -13,10 +14,11 @@ export const HeaderContainer = styled(AppBar)({
   flexWrap: 'wrap'
 });
 
-export const TitleContainer = styled(Box)({
+export const TitleContainer = styled(Link)({
   display: 'flex',
   alignItems: 'center',
-  color: 'white',
+  color: 'inherit',
   fontSize: 32,
-  gap: 8
+  gap: 8,
+  textDecoration: 'none'
 });

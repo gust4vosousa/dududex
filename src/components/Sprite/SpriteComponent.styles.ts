@@ -26,7 +26,6 @@ export const SpriteWrapper = styled(Box)({
 export const OptionsContainer = styled(Box)({
   display: 'flex',
   flexDirection: 'row',
-  color: 'white',
   justifyContent: 'space-between',
   alignItems: 'center',
   backgroundColor: colors.background.dark,

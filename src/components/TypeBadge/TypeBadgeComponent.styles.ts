@@ -13,7 +13,7 @@ export const TypeBadge = styled(Box)<ITypeBadgeStyles>(
     minHeight: 24,
     padding: 4,
     backgroundColor: color,
-    color: 'white',
+    color: 'inherit',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

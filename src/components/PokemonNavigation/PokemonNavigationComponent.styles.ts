@@ -14,7 +14,6 @@ export const NavigationContainer = styled(Box)({
 export const NavigationButton = styled(Box)({
   display: 'flex',
   flexDirection: 'row',
-  color: 'white',
   justifyContent: 'center',
   alignItems: 'center',
   backgroundColor: colors.background.dark,

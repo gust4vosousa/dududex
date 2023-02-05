@@ -1,7 +1,8 @@
 import { ThemeProvider, useTheme } from '@material-ui/core';
 import { Provider } from 'react-redux';
-import { HeaderComponent } from './components/Header/HeaderComponent';
-import { HomeScreen } from './screens/Home/HomeScreen';
+import { RouterProvider } from 'react-router-dom';
+import { AppContainer } from './App.styles';
+import { router } from './routes/routes';
 import store from './store/store';
 
 const App = () => {
@@ -10,8 +11,9 @@ const App = () => {
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <HeaderComponent />
-        <HomeScreen />
+        <AppContainer>
+          <RouterProvider router={router} />
+        </AppContainer>
       </ThemeProvider>
     </Provider>
   );

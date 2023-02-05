@@ -8,7 +8,6 @@ export const PokemonDetailsCard = styled(Box)({
   justifyContent: 'center',
   gap: 16,
   fontSize: 18,
-  color: 'white',
   backgroundColor: colors.background.main,
   borderRadius: 8,
   padding: 16,

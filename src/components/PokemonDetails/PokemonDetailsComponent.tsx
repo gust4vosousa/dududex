@@ -45,7 +45,7 @@ export const PokemonDetailsComponent: React.FC<IPokemonDetailsProps> = ({
 
     {isBusy && (
       <Fragment>
-        <CircularProgress size={120} />
+        <CircularProgress size={100} color='inherit' />
       </Fragment>
     )}
   </PokemonDetailsCard>
