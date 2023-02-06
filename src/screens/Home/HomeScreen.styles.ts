@@ -8,6 +8,6 @@ export const HomeScreenContainer = styled(Box)({
   padding: 16
 });
 
-export const PokemonDetailsComponentContainer = styled(Box)({
+export const ScreenElementContainer = styled(Box)({
   minWidth: '100%'
 });

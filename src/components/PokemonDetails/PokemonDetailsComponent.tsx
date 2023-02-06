@@ -1,6 +1,7 @@
 import WarningIcon from '@mui/icons-material/Warning';
 import { Box, CircularProgress } from '@mui/material';
-import { Fragment } from 'react';
+import { Fragment, useMemo } from 'react';
+import { EType } from '../../@types/Entities.types';
 import { PokemonNavigationComponent } from '../PokemonNavigation/PokemonNavigationComponent';
 import { SpriteComponent } from '../Sprite/SpriteComponent';
 import { StatsTableComponent } from '../StatsTable/StatsTableComponent';
@@ -15,38 +16,46 @@ import { IPokemonDetailsProps } from './PokemonDetailsComponent.types';
 export const PokemonDetailsComponent: React.FC<IPokemonDetailsProps> = ({
   pokemon,
   isBusy
-}) => (
-  <PokemonDetailsCard>
-    {!pokemon && !isBusy && (
-      <Fragment>
-        <WarningIcon fontSize='large' />
-        {
-          'Nothing to show yet. Please, select a Pokémon to display its information'
-        }
-      </Fragment>
-    )}
+}) => {
+  const pokemonTypes: EType[] = useMemo(
+    () =>
+      pokemon?.types.map((pokemonType) => pokemonType.type.name as EType) || [],
+    [pokemon?.types]
+  );
 
-    {pokemon && !isBusy && (
-      <Fragment>
-        <Box>
-          <PokemonNavigationComponent currentPokemonId={pokemon.id} />
-        </Box>
+  return (
+    <PokemonDetailsCard>
+      {!pokemon && !isBusy && (
+        <Fragment>
+          <WarningIcon fontSize='large' />
+          {
+            'Nothing to show yet. Please, select a Pokémon to display its information'
+          }
+        </Fragment>
+      )}
 
-        <PokemonDetailsContainer>
-          <PokemonInfoContainer>
-            <TypeBadgeComponent types={pokemon.types} />
-            <SpriteComponent sprites={pokemon.sprites} />
-          </PokemonInfoContainer>
+      {pokemon && !isBusy && (
+        <Fragment>
+          <Box>
+            <PokemonNavigationComponent currentPokemonId={pokemon.id} />
+          </Box>
 
-          <StatsTableComponent statsList={pokemon.stats} />
-        </PokemonDetailsContainer>
-      </Fragment>
-    )}
+          <PokemonDetailsContainer>
+            <PokemonInfoContainer>
+              <TypeBadgeComponent types={pokemonTypes} />
+              <SpriteComponent sprites={pokemon.sprites} />
+            </PokemonInfoContainer>
 
-    {isBusy && (
-      <Fragment>
-        <CircularProgress size={100} color='inherit' />
-      </Fragment>
-    )}
-  </PokemonDetailsCard>
-);
+            <StatsTableComponent statsList={pokemon.stats} />
+          </PokemonDetailsContainer>
+        </Fragment>
+      )}
+
+      {isBusy && (
+        <Fragment>
+          <CircularProgress size={100} color='inherit' />
+        </Fragment>
+      )}
+    </PokemonDetailsCard>
+  );
+};

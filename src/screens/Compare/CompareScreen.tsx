@@ -1,3 +1,9 @@
+import { ScreenProvider } from '../../providers/Screen/ScreenProvider';
+
 export const CompareScreen: React.FC = () => {
-  return <>Test</>;
+  return (
+    <ScreenProvider>
+      <>Test</>
+    </ScreenProvider>
+  );
 };

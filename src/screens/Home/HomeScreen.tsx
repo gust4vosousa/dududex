@@ -1,41 +1,40 @@
-import { Box } from '@mui/material';
-import { Pokedexes } from 'pokenode-ts';
-import { useEffect, useMemo } from 'react';
-import { ERequestStatus } from '../../@types/RequestStatus.types';
 import { PokemonDetailsComponent } from '../../components/PokemonDetails/PokemonDetailsComponent';
-import { fetchPokedexById } from '../../store/pokedex/pokedexThunks';
-import {
-  selectPokemonData,
-  selectPokemonRequestStatus
-} from '../../store/pokemon/pokemonSelectors';
-import { useAppDispatch, useAppSelector } from '../../store/store';
+import { SearchComponent } from '../../components/Search/SearchComponent';
+import { ScreenProvider } from '../../providers/Screen/ScreenProvider';
+import { useHomeScreenRules } from './HomeScreen.rules';
 import {
   HomeScreenContainer,
-  PokemonDetailsComponentContainer
+  ScreenElementContainer
 } from './HomeScreen.styles';
 
 export const HomeScreen: React.FC = () => {
-  const dispatch = useAppDispatch();
-
-  const pokemonData = useAppSelector(selectPokemonData);
-  const pokemonRequestStatus = useAppSelector(selectPokemonRequestStatus);
-
-  const isPokemonBusy = useMemo(
-    () => pokemonRequestStatus === ERequestStatus.busy,
-    [pokemonRequestStatus]
-  );
-
-  useEffect(() => {
-    dispatch(fetchPokedexById(Pokedexes.NATIONAL));
-  }, [dispatch]);
+  const {
+    pokemonList,
+    pokemonData,
+    isPokedexBusy,
+    isPokemonBusy,
+    onPokemonSearch
+  } = useHomeScreenRules();
 
   return (
-    <HomeScreenContainer>
-      <PokemonDetailsComponentContainer>
-        <PokemonDetailsComponent pokemon={pokemonData} isBusy={isPokemonBusy} />
-      </PokemonDetailsComponentContainer>
+    <ScreenProvider>
+      <HomeScreenContainer>
+        <ScreenElementContainer>
+          <SearchComponent
+            pokemonList={pokemonList}
+            label='Pokémon'
+            isBusy={isPokedexBusy}
+            onChange={onPokemonSearch}
+          />
+        </ScreenElementContainer>
 
-      <Box fontSize={10}>{`v${process.env.REACT_APP_VERSION}`}</Box>
-    </HomeScreenContainer>
+        <ScreenElementContainer>
+          <PokemonDetailsComponent
+            pokemon={pokemonData}
+            isBusy={isPokemonBusy}
+          />
+        </ScreenElementContainer>
+      </HomeScreenContainer>
+    </ScreenProvider>
   );
 };
