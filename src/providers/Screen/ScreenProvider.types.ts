@@ -1,3 +1,3 @@
 export interface IScreenProps {
-  children: JSX.Element;
+  children: JSX.Element
 }

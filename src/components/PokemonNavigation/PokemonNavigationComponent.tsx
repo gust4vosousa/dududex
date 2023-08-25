@@ -1,19 +1,19 @@
-import { Box } from '@material-ui/core';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { firstLetterUpperCaseUtil } from '../../utils/formatUtils';
-import { usePokemonNavigationComponentRules } from './PokemonNavigationComponent.rules';
+// import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+// import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { Box } from '@mui/material'
+import { firstLetterUpperCaseUtil } from '../../utils/formatUtils'
+import { usePokemonNavigationComponentRules } from './PokemonNavigationComponent.rules'
 import {
   NavigationButton,
-  NavigationContainer
-} from './PokemonNavigationComponent.styles';
-import { IPokemonNavigationProps } from './PokemonNavigationComponent.types';
+  NavigationContainer,
+} from './PokemonNavigationComponent.styles'
+import { IPokemonNavigationProps } from './PokemonNavigationComponent.types'
 
 export const PokemonNavigationComponent: React.FC<IPokemonNavigationProps> = ({
-  currentPokemonId
+  currentPokemonId,
 }) => {
   const { currentPokemon, previousPokemon, nextPokemon, onPokemonSearch } =
-    usePokemonNavigationComponentRules(currentPokemonId);
+    usePokemonNavigationComponentRules(currentPokemonId)
 
   return (
     <NavigationContainer>
@@ -22,7 +22,7 @@ export const PokemonNavigationComponent: React.FC<IPokemonNavigationProps> = ({
           {`#${previousPokemon.id} ${firstLetterUpperCaseUtil(
             previousPokemon.label
           )}`}
-          <ArrowBackIosNewIcon />
+          {/* <ArrowBackIosNewIcon /> */}
         </NavigationButton>
       )}
 
@@ -35,10 +35,10 @@ export const PokemonNavigationComponent: React.FC<IPokemonNavigationProps> = ({
 
       {nextPokemon && (
         <NavigationButton onClick={() => onPokemonSearch(nextPokemon?.id!)}>
-          <ArrowForwardIosIcon />
+          {/* <ArrowForwardIosIcon /> */}
           {`#${nextPokemon.id} ${firstLetterUpperCaseUtil(nextPokemon.label)}`}
         </NavigationButton>
       )}
     </NavigationContainer>
-  );
-};
+  )
+}

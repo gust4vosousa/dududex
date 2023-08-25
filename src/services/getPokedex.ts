@@ -1,7 +1,7 @@
-import { GameClient, Pokedexes } from 'pokenode-ts';
-import { clientOptions } from './clientOptions';
+import { GameClient } from 'pokenode-ts'
+import { EPokedexes } from '../@types/Entities.types'
 
-const httpClient = new GameClient(clientOptions);
+const httpClient = new GameClient()
 
-export const getPokedexById = async (id: Pokedexes) =>
-  await httpClient.getPokedexById(id);
+export const getPokedexById = async (id: EPokedexes) =>
+  await httpClient.getPokedexById(id)

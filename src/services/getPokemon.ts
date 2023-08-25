@@ -1,10 +1,9 @@
-import { PokemonClient } from 'pokenode-ts';
-import { clientOptions } from './clientOptions';
+import { PokemonClient } from 'pokenode-ts'
 
-const httpClient = new PokemonClient(clientOptions);
+const httpClient = new PokemonClient()
 
 export const getPokemonByName = async (pokemon: string) =>
-  await httpClient.getPokemonByName(pokemon);
+  await httpClient.getPokemonByName(pokemon)
 
 export const getPokemonById = async (id: number) =>
-  await httpClient.getPokemonById(id);
+  await httpClient.getPokemonById(id)

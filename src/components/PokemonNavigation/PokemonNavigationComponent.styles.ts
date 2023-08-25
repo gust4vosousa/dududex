@@ -1,5 +1,5 @@
-import { Box, styled } from '@material-ui/core';
-import { colors } from '../../theme/colors';
+import { Box, styled } from '@mui/material'
+import { colors } from '../../theme/colors'
 
 export const NavigationContainer = styled(Box)({
   display: 'flex',
@@ -8,8 +8,8 @@ export const NavigationContainer = styled(Box)({
   alignItems: 'center',
   padding: 8,
   gap: 32,
-  flexWrap: 'wrap'
-});
+  flexWrap: 'wrap',
+})
 
 export const NavigationButton = styled(Box)({
   display: 'flex',
@@ -22,6 +22,6 @@ export const NavigationButton = styled(Box)({
   cursor: 'pointer',
   '&:hover': {
     backgroundColor: colors.background.light,
-    color: colors.background.dark
-  }
-});
+    color: colors.background.dark,
+  },
+})

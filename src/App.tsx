@@ -1,22 +1,24 @@
-import { ThemeProvider, useTheme } from '@material-ui/core';
-import { Provider } from 'react-redux';
-import { RouterProvider } from 'react-router-dom';
-import { AppContainer } from './App.styles';
-import { router } from './routes/routes';
-import store from './store/store';
+import { ThemeProvider } from '@mui/material/styles'
+import { Provider } from 'react-redux'
+import { RouterProvider } from 'react-router-dom'
+import { router } from './routes/routes'
+import store from './store/store'
+import { useCustomTheme } from './theme/useCustomThemeHook'
+import { CssBaseline } from '@mui/material'
+import React from 'react'
+import { ColorModeContext } from './contexts/ColorMode/ColorModeContext'
 
-const App = () => {
-  const theme = useTheme();
+export const App: React.FC = () => {
+  const { colorMode, theme } = useCustomTheme()
 
   return (
     <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <AppContainer>
+      <ColorModeContext.Provider value={colorMode}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
           <RouterProvider router={router} />
-        </AppContainer>
-      </ThemeProvider>
+        </ThemeProvider>
+      </ColorModeContext.Provider>
     </Provider>
-  );
-};
-
-export default App;
+  )
+}

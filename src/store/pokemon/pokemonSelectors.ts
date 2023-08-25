@@ -1,27 +1,23 @@
-import { Pokemon } from 'pokenode-ts';
-import { ERequestStatus } from '../../@types/RequestStatus.types';
-import { RootState } from '../store.types';
-import { IPokemonListItem } from './pokemonSlice.types';
+import { createSelector } from '@reduxjs/toolkit'
+import { Pokemon } from 'pokenode-ts'
+import { ERequestStatus } from '../../@types/RequestStatus.types'
+import { selectPokemonList } from '../pokedex/pokedexSelectors'
+import { RootState } from '../store.types'
+import { IPokemonState, TPokemonListItem } from './pokemonSlice.types'
+
+export const selectPokemon = (state: RootState): IPokemonState => state.pokemon
 
 export const selectPokemonData = (state: RootState): Pokemon | undefined =>
-  state.pokemon.data;
+  createSelector([selectPokemon], ({ data }) => data)(state)
 
 export const selectPokemonRequestStatus = (state: RootState): ERequestStatus =>
-  state.pokemon.status;
-
-export const selectPokemonList = (state: RootState): IPokemonListItem[] =>
-  state.pokedex.data?.pokemon_entries.map((entry) => {
-    return {
-      label: entry.pokemon_species.name,
-      id: entry.entry_number
-    };
-  }) || [];
+  createSelector([selectPokemon], ({ status }) => status)(state)
 
 export const selectPokemonById = (
   state: RootState,
   pokemonId: number
-): IPokemonListItem | undefined => {
-  const pokemonList = selectPokemonList(state);
+): TPokemonListItem | undefined => {
+  const pokemonList = selectPokemonList(state)
 
-  return pokemonList.find((pokemon) => pokemon.id === pokemonId);
-};
+  return pokemonList.find((pokemon) => pokemon.id === pokemonId)
+}

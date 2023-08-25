@@ -1,8 +1,11 @@
-import { IPokemonListItem } from '../../store/pokemon/pokemonSlice.types';
+export interface ISelectProps {
+  options: ISelectOption[]
+  label?: string
+  loading: boolean
+  onChange: (value: ISelectOption | null) => void
+}
 
-export interface ISelectPokemonProps {
-  options: IPokemonListItem[];
-  label?: string;
-  loading: boolean;
-  onChange: (pokemonId: number) => void;
+export interface ISelectOption {
+  id: number
+  label: string
 }

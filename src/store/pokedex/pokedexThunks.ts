@@ -1,11 +1,11 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { Pokedexes } from 'pokenode-ts';
-import { getPokedexById } from '../../services/getPokedex';
-import { EPokedexActionTypes } from './pokedexSlice.types';
+import { createAsyncThunk } from '@reduxjs/toolkit'
+import { getPokedexById } from '../../services/getPokedex'
+import { EPokedexActionTypes } from './pokedexSlice.types'
+import { EPokedexes } from '../../@types/Entities.types'
 
 export const fetchPokedexById = createAsyncThunk(
   EPokedexActionTypes.fetchById,
-  async (id: Pokedexes) => {
-    return await getPokedexById(id);
+  async (id: EPokedexes) => {
+    return await getPokedexById(id)
   }
-);
+)

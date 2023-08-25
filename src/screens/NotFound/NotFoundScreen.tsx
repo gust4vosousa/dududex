@@ -1,10 +1,10 @@
-import { Box } from '@material-ui/core';
-import { ScreenProvider } from '../../providers/Screen/ScreenProvider';
+import { Box } from '@mui/material'
+import { ScreenProvider } from '../../providers/Screen/ScreenProvider'
 import {
   HomepageLink,
   MessageContainer,
-  NotFoundComponent
-} from './NotFoundScreen.styles';
+  NotFoundComponent,
+} from './NotFoundScreen.styles'
 
 export const NotFoundScreen: React.FC = () => {
   return (
@@ -17,5 +17,5 @@ export const NotFoundScreen: React.FC = () => {
         <HomepageLink to='/'>Return to Homepage</HomepageLink>
       </NotFoundComponent>
     </ScreenProvider>
-  );
-};
+  )
+}

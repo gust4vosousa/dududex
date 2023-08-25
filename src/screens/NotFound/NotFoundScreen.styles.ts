@@ -1,6 +1,6 @@
-import { Box, styled } from '@material-ui/core';
-import { Link } from 'react-router-dom';
-import { colors } from '../../theme/colors';
+import { Box, styled } from '@mui/material'
+import { Link } from 'react-router-dom'
+import { colors } from '../../theme/colors'
 
 export const NotFoundComponent = styled(Box)({
   display: 'flex',
@@ -10,8 +10,8 @@ export const NotFoundComponent = styled(Box)({
   textAlign: 'center',
   fontSize: 32,
   padding: 32,
-  gap: 16
-});
+  gap: 16,
+})
 
 export const MessageContainer = styled(Box)({
   display: 'flex',
@@ -20,10 +20,10 @@ export const MessageContainer = styled(Box)({
   alignItems: 'center',
   backgroundColor: colors.background.main,
   padding: 32,
-  borderRadius: 16
-});
+  borderRadius: 16,
+})
 
 export const HomepageLink = styled(Link)({
   fontSize: 16,
-  color: 'inherit'
-});
+  color: 'inherit',
+})

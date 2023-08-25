@@ -1,11 +1,14 @@
-import { PokemonDetailsComponent } from '../../components/PokemonDetails/PokemonDetailsComponent';
-import { SearchComponent } from '../../components/Search/SearchComponent';
-import { ScreenProvider } from '../../providers/Screen/ScreenProvider';
-import { useHomeScreenRules } from './HomeScreen.rules';
-import {
-  HomeScreenContainer,
-  ScreenElementContainer
-} from './HomeScreen.styles';
+import { Box, Card, CircularProgress } from '@mui/material'
+import { Fragment } from 'react'
+import { IconComponent } from '../../components/Icon/IconComponent'
+import { EIcons } from '../../components/Icon/IconComponent.types'
+import { PokemonNavigationComponent } from '../../components/PokemonNavigation/PokemonNavigationComponent'
+import { SelectComponent } from '../../components/SelectPokemon/SelectPokemonComponent'
+import { SpriteComponent } from '../../components/Sprite/SpriteComponent'
+import { StatsTableComponent } from '../../components/StatsTable/StatsTableComponent'
+import { TypeBadgeComponent } from '../../components/TypeBadge/TypeBadgeComponent'
+import { ScreenProvider } from '../../providers/Screen/ScreenProvider'
+import { useHomeScreenRules } from './HomeScreen.rules'
 
 export const HomeScreen: React.FC = () => {
   const {
@@ -13,28 +16,44 @@ export const HomeScreen: React.FC = () => {
     pokemonData,
     isPokedexBusy,
     isPokemonBusy,
-    onPokemonSearch
-  } = useHomeScreenRules();
+    onPokemonSearch,
+    pokemonTypes,
+  } = useHomeScreenRules()
 
   return (
     <ScreenProvider>
-      <HomeScreenContainer>
-        <ScreenElementContainer>
-          <SearchComponent
-            pokemonList={pokemonList}
+      <Box style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+        <Card style={{ padding: 16 }}>
+          <SelectComponent
+            options={pokemonList}
             label='Pokémon'
-            isBusy={isPokedexBusy}
+            loading={isPokedexBusy}
             onChange={onPokemonSearch}
           />
-        </ScreenElementContainer>
+        </Card>
 
-        <ScreenElementContainer>
-          <PokemonDetailsComponent
-            pokemon={pokemonData}
-            isBusy={isPokemonBusy}
-          />
-        </ScreenElementContainer>
-      </HomeScreenContainer>
+        <Card style={{ padding: 16 }}>
+          {isPokemonBusy && <CircularProgress size={50} color='inherit' />}
+
+          {!pokemonData && !isPokemonBusy && (
+            <Fragment>
+              <IconComponent icon={EIcons.WARNING} />
+              {
+                'Nothing to show yet. Please, select a Pokémon to display its information'
+              }
+            </Fragment>
+          )}
+
+          {pokemonData && !isPokemonBusy && (
+            <Fragment>
+              <PokemonNavigationComponent currentPokemonId={pokemonData.id} />
+              <TypeBadgeComponent types={pokemonTypes} />
+              <SpriteComponent sprites={pokemonData.sprites} />
+              <StatsTableComponent statsList={pokemonData.stats} />
+            </Fragment>
+          )}
+        </Card>
+      </Box>
     </ScreenProvider>
-  );
-};
+  )
+}
