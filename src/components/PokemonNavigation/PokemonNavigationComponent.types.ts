@@ -1,8 +1,8 @@
 export enum ENavigationModes {
   previous = 'previous',
-  next = 'next'
+  next = 'next',
 }
 
 export interface IPokemonNavigationProps {
-  currentPokemonId: number;
+  currentPokemonId: number
 }

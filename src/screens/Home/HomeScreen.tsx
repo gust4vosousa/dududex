@@ -1,5 +1,6 @@
-import { Box, Card, CircularProgress } from '@mui/material'
-import { Fragment } from 'react'
+import React, { Fragment } from 'react'
+
+import { Box, Card, CircularProgress, Grid } from '@mui/material'
 import { IconComponent } from '../../components/Icon/IconComponent'
 import { EIcons } from '../../components/Icon/IconComponent.types'
 import { PokemonNavigationComponent } from '../../components/PokemonNavigation/PokemonNavigationComponent'
@@ -12,11 +13,11 @@ import { useHomeScreenRules } from './HomeScreen.rules'
 
 export const HomeScreen: React.FC = () => {
   const {
-    pokemonList,
-    pokemonData,
     isPokedexBusy,
     isPokemonBusy,
     onPokemonSearch,
+    pokemonData,
+    pokemonList,
     pokemonTypes,
   } = useHomeScreenRules()
 
@@ -45,12 +46,40 @@ export const HomeScreen: React.FC = () => {
           )}
 
           {pokemonData && !isPokemonBusy && (
-            <Fragment>
-              <PokemonNavigationComponent currentPokemonId={pokemonData.id} />
-              <TypeBadgeComponent types={pokemonTypes} />
-              <SpriteComponent sprites={pokemonData.sprites} />
-              <StatsTableComponent statsList={pokemonData.stats} />
-            </Fragment>
+            <Grid container spacing={1}>
+              <Grid item xs={12}>
+                <PokemonNavigationComponent currentPokemonId={pokemonData.id} />
+              </Grid>
+
+              <Grid
+                item
+                xs={12}
+                md={6}
+                style={{
+                  alignItems: 'center',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 8,
+                }}
+              >
+                <TypeBadgeComponent types={pokemonTypes} />
+                <SpriteComponent sprites={pokemonData.sprites} />
+              </Grid>
+
+              <Grid
+                item
+                xs={12}
+                md={6}
+                style={{
+                  alignItems: 'center',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 8,
+                }}
+              >
+                <StatsTableComponent statsList={pokemonData.stats} />
+              </Grid>
+            </Grid>
           )}
         </Card>
       </Box>

@@ -6,6 +6,5 @@ export const ColorModeContext = createContext<IColorModeContext>({
   toggleColorMode: () => {},
 })
 
-export const useColorMode = (): IColorModeContext => {
-  return useContext(ColorModeContext)
-}
+export const useColorMode = (): IColorModeContext =>
+  useContext(ColorModeContext)

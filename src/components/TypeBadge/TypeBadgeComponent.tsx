@@ -1,7 +1,8 @@
-import React from 'react';
-import { getTypeColorUtil } from '../../utils/color/colorUtils';
-import { TypeBadge, TypeBadgeContainer } from './TypeBadgeComponent.styles';
-import { ITypeBadgeProps } from './TypeBadgeComponent.types';
+import React from 'react'
+
+import { getTypeColorUtil } from '../../utils/color/colorUtils'
+import { TypeBadge, TypeBadgeContainer } from './TypeBadgeComponent.styles'
+import { ITypeBadgeProps } from './TypeBadgeComponent.types'
 
 export const TypeBadgeComponent: React.FC<ITypeBadgeProps> = ({ types }) => {
   return (
@@ -17,5 +18,5 @@ export const TypeBadgeComponent: React.FC<ITypeBadgeProps> = ({ types }) => {
         </TypeBadge>
       ))}
     </TypeBadgeContainer>
-  );
-};
+  )
+}

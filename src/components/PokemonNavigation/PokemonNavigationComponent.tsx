@@ -1,44 +1,63 @@
-// import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-// import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { Box } from '@mui/material'
-import { firstLetterUpperCaseUtil } from '../../utils/formatUtils'
-import { usePokemonNavigationComponentRules } from './PokemonNavigationComponent.rules'
+import React from 'react'
+
+import { Button, Grid } from '@mui/material'
+import { IconComponent } from '../Icon/IconComponent'
+import { EIcons } from '../Icon/IconComponent.types'
 import {
-  NavigationButton,
-  NavigationContainer,
+  getPokemonLabel,
+  usePokemonNavigationComponentRules,
+} from './PokemonNavigationComponent.rules'
+import {
+  StyledGridNext,
+  StyledGridPrevious,
 } from './PokemonNavigationComponent.styles'
 import { IPokemonNavigationProps } from './PokemonNavigationComponent.types'
 
 export const PokemonNavigationComponent: React.FC<IPokemonNavigationProps> = ({
   currentPokemonId,
 }) => {
-  const { currentPokemon, previousPokemon, nextPokemon, onPokemonSearch } =
+  const { currentPokemon, nextPokemon, onPokemonSearch, previousPokemon } =
     usePokemonNavigationComponentRules(currentPokemonId)
 
   return (
-    <NavigationContainer>
-      {previousPokemon && (
-        <NavigationButton onClick={() => onPokemonSearch(previousPokemon?.id!)}>
-          {`#${previousPokemon.id} ${firstLetterUpperCaseUtil(
-            previousPokemon.label
-          )}`}
-          {/* <ArrowBackIosNewIcon /> */}
-        </NavigationButton>
-      )}
+    <Grid
+      container
+      style={{
+        alignItems: 'center',
+      }}
+    >
+      <StyledGridPrevious item xs={12} md={4}>
+        {previousPokemon && (
+          <Button
+            onClick={() => onPokemonSearch(previousPokemon.id)}
+            variant='contained'
+          >
+            {getPokemonLabel(previousPokemon)}
+            <IconComponent icon={EIcons.ARROW_BACK} />
+          </Button>
+        )}
+      </StyledGridPrevious>
 
-      <Box style={{ fontSize: 48 }}>
-        {currentPokemon &&
-          `#${currentPokemon.id} ${firstLetterUpperCaseUtil(
-            currentPokemon.label
-          )}`}
-      </Box>
+      <Grid
+        item
+        xs={12}
+        md={4}
+        style={{ display: 'flex', fontSize: 48, justifyContent: 'center' }}
+      >
+        {currentPokemon && getPokemonLabel(currentPokemon)}
+      </Grid>
 
-      {nextPokemon && (
-        <NavigationButton onClick={() => onPokemonSearch(nextPokemon?.id!)}>
-          {/* <ArrowForwardIosIcon /> */}
-          {`#${nextPokemon.id} ${firstLetterUpperCaseUtil(nextPokemon.label)}`}
-        </NavigationButton>
-      )}
-    </NavigationContainer>
+      <StyledGridNext item xs={12} md={4}>
+        {nextPokemon && (
+          <Button
+            onClick={() => onPokemonSearch(nextPokemon.id)}
+            variant='contained'
+          >
+            <IconComponent icon={EIcons.ARROW_FORWARD} />
+            {getPokemonLabel(nextPokemon)}
+          </Button>
+        )}
+      </StyledGridNext>
+    </Grid>
   )
 }

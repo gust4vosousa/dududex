@@ -54,11 +54,11 @@ export const useHomeScreenRules = () => {
   }, [dispatch])
 
   return {
-    pokemonList,
-    pokemonData,
     isPokedexBusy,
     isPokemonBusy,
     onPokemonSearch,
+    pokemonData,
+    pokemonList,
     pokemonTypes,
   }
 }

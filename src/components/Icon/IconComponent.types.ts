@@ -3,6 +3,8 @@ export interface IIconProps {
 }
 
 export enum EIcons {
+  ARROW_BACK = 'arrow_back_ios_new',
+  ARROW_FORWARD = 'arrow_forward_ios',
   COMPARE = 'compare',
   DARK_MODE = 'dark_mode',
   HOME = 'home',
