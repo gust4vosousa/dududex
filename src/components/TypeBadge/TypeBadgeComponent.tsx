@@ -1,22 +1,31 @@
 import React from 'react'
 
-import { getTypeColorUtil } from '../../utils/color/colorUtils'
-import { TypeBadge, TypeBadgeContainer } from './TypeBadgeComponent.styles'
+import { Box } from '@mui/material'
+import { useColor } from '../../hooks/useColor/useColorHook'
+import { StyledTypeBadge } from './TypeBadgeComponent.styles'
 import { ITypeBadgeProps } from './TypeBadgeComponent.types'
 
 export const TypeBadgeComponent: React.FC<ITypeBadgeProps> = ({ types }) => {
+  const { getTypeColor } = useColor()
+
   return (
-    <TypeBadgeContainer>
+    <Box
+      style={{
+        alignItems: 'center',
+        display: 'flex',
+        flexDirection: 'row',
+      }}
+    >
       {types.map((type, index) => (
-        <TypeBadge
+        <StyledTypeBadge
           key={index}
-          color={getTypeColorUtil(type)}
-          isFirst={index === 0 ? true : false}
+          color={getTypeColor(type)}
+          isFirst={index === 0}
           isMonoType={types.length <= 1}
         >
           {type.toUpperCase()}
-        </TypeBadge>
+        </StyledTypeBadge>
       ))}
-    </TypeBadgeContainer>
+    </Box>
   )
 }

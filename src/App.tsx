@@ -4,21 +4,24 @@ import { CssBaseline } from '@mui/material'
 import { ThemeProvider } from '@mui/material/styles'
 import { Provider } from 'react-redux'
 import { RouterProvider } from 'react-router-dom'
+import { useAppRules } from './App.rules'
 import { ColorModeContext } from './contexts/ColorMode/ColorModeContext'
+import { DrawerContext } from './contexts/Drawer/DrawerContext'
 import { router } from './routes/routes'
 import store from './store/store'
-import { useCustomTheme } from './theme/useCustomThemeHook'
 
 export const App: React.FC = () => {
-  const { colorMode, theme } = useCustomTheme()
+  const { colorModeContextValue, drawerContextValue, theme } = useAppRules()
 
   return (
     <Provider store={store}>
-      <ColorModeContext.Provider value={colorMode}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <RouterProvider router={router} />
-        </ThemeProvider>
+      <ColorModeContext.Provider value={colorModeContextValue}>
+        <DrawerContext.Provider value={drawerContextValue}>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <RouterProvider router={router} />
+          </ThemeProvider>
+        </DrawerContext.Provider>
       </ColorModeContext.Provider>
     </Provider>
   )

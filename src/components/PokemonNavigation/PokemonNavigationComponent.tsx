@@ -1,12 +1,10 @@
 import React from 'react'
 
 import { Button, Grid } from '@mui/material'
+import { formatPokemonEntryUtil } from '../../utils/formatUtils'
 import { IconComponent } from '../Icon/IconComponent'
 import { EIcons } from '../Icon/IconComponent.types'
-import {
-  getPokemonLabel,
-  usePokemonNavigationComponentRules,
-} from './PokemonNavigationComponent.rules'
+import { usePokemonNavigationComponentRules } from './PokemonNavigationComponent.rules'
 import {
   StyledGridNext,
   StyledGridPrevious,
@@ -14,10 +12,11 @@ import {
 import { IPokemonNavigationProps } from './PokemonNavigationComponent.types'
 
 export const PokemonNavigationComponent: React.FC<IPokemonNavigationProps> = ({
-  currentPokemonId,
+  currentSearch,
+  onPokemonSearch,
 }) => {
-  const { currentPokemon, nextPokemon, onPokemonSearch, previousPokemon } =
-    usePokemonNavigationComponentRules(currentPokemonId)
+  const { currentPokemon, nextPokemon, previousPokemon } =
+    usePokemonNavigationComponentRules(currentSearch)
 
   return (
     <Grid
@@ -29,10 +28,10 @@ export const PokemonNavigationComponent: React.FC<IPokemonNavigationProps> = ({
       <StyledGridPrevious item xs={12} md={4}>
         {previousPokemon && (
           <Button
-            onClick={() => onPokemonSearch(previousPokemon.id)}
+            onClick={() => onPokemonSearch(previousPokemon)}
             variant='contained'
           >
-            {getPokemonLabel(previousPokemon)}
+            {formatPokemonEntryUtil(previousPokemon)}
             <IconComponent icon={EIcons.ARROW_BACK} />
           </Button>
         )}
@@ -44,17 +43,17 @@ export const PokemonNavigationComponent: React.FC<IPokemonNavigationProps> = ({
         md={4}
         style={{ display: 'flex', fontSize: 48, justifyContent: 'center' }}
       >
-        {currentPokemon && getPokemonLabel(currentPokemon)}
+        {currentPokemon && formatPokemonEntryUtil(currentPokemon)}
       </Grid>
 
       <StyledGridNext item xs={12} md={4}>
         {nextPokemon && (
           <Button
-            onClick={() => onPokemonSearch(nextPokemon.id)}
+            onClick={() => onPokemonSearch(nextPokemon)}
             variant='contained'
           >
             <IconComponent icon={EIcons.ARROW_FORWARD} />
-            {getPokemonLabel(nextPokemon)}
+            {formatPokemonEntryUtil(nextPokemon)}
           </Button>
         )}
       </StyledGridNext>

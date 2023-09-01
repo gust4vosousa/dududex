@@ -1,9 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { ERequestStatus } from '../../@types/RequestStatus.types';
-import { IPokedexState } from './pokedexSlice.types';
-import { fetchPokedexById } from './pokedexThunks';
+import { createSlice } from '@reduxjs/toolkit'
+import { ERequestStatus } from '../../@types/RequestStatus.types'
+import { IPokedexState } from './pokedexSlice.types'
+import { fetchPokedexById } from './pokedexThunks'
 
-const initialState: IPokedexState = { status: ERequestStatus.waiting };
+const initialState: IPokedexState = { status: ERequestStatus.WAITING }
 
 export const pokedexSlice = createSlice({
   name: 'pokedex',
@@ -11,16 +11,16 @@ export const pokedexSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchPokedexById.fulfilled, (state, action) => {
-      state.data = action.payload;
-      state.status = ERequestStatus.success;
-    });
+      state.data = action.payload
+      state.status = ERequestStatus.SUCCESS
+    })
     builder.addCase(fetchPokedexById.pending, (state) => {
-      state.status = ERequestStatus.busy;
-    });
+      state.status = ERequestStatus.BUSY
+    })
     builder.addCase(fetchPokedexById.rejected, (state) => {
-      state.status = ERequestStatus.failure;
-    });
-  }
-});
+      state.status = ERequestStatus.FAILURE
+    })
+  },
+})
 
-export const pokedexReducer = pokedexSlice.reducer;
+export const pokedexReducer = pokedexSlice.reducer

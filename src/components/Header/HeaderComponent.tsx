@@ -1,72 +1,29 @@
-import logo from '../../assets/icons/pokeball48.png'
-import { INavigationItem } from './HeaderComponent.types'
-import { Link } from 'react-router-dom'
-import { AppBar, Box, IconButton, Toolbar } from '@mui/material'
-import { useColorMode } from '../../contexts/ColorMode/ColorModeContext'
+import React from 'react'
+
+import { AppBar, IconButton, Toolbar, Typography } from '@mui/material'
+import { useColorModeContext } from '../../contexts/ColorMode/ColorModeContext'
+import { useDrawerContext } from '../../contexts/Drawer/DrawerContext'
 import { IconComponent } from '../Icon/IconComponent'
 import { EIcons } from '../Icon/IconComponent.types'
 
 export const HeaderComponent: React.FC = () => {
-  const { colorMode, toggleColorMode } = useColorMode()
-
-  const navigationItems: INavigationItem[] = [
-    {
-      icon: <IconComponent icon={EIcons.HOME} />,
-      title: 'Home',
-      url: '/',
-    },
-    {
-      icon: <IconComponent icon={EIcons.COMPARE} />,
-      title: 'Compare',
-      url: '/compare',
-    },
-  ]
+  const { currentColorMode, toggleColorMode } = useColorModeContext()
+  const { toggleDrawerOpen } = useDrawerContext()
 
   return (
-    <AppBar
-      position='static'
-      style={{
-        display: 'flex',
-        flexDirection: 'row',
-        gap: 32,
-        justifyContent: 'center',
-        minHeight: 100,
-      }}
-    >
-      <Toolbar style={{ display: 'flex', gap: 32 }}>
-        <Box
-          style={{
-            alignItems: 'center',
-            display: 'flex',
-            fontSize: 32,
-            gap: 8,
-          }}
-        >
-          <img src={logo} alt='Logo' />
-          Dududex
-        </Box>
+    <AppBar position='static' enableColorOnDark>
+      <Toolbar style={{ justifyContent: 'space-between', flexWrap: 'wrap' }}>
+        <IconButton onClick={toggleDrawerOpen}>
+          <IconComponent icon={EIcons.MENU} />
+        </IconButton>
 
-        <Box style={{ display: 'flex', flexDirection: 'row', gap: 16 }}>
-          {navigationItems.map(({ icon, title, url }) => (
-            <Link
-              to={url}
-              style={{
-                alignItems: 'center',
-                color: 'white',
-                display: 'flex',
-                gap: 8,
-                textDecoration: 'none',
-              }}
-            >
-              {icon}
-              {title}
-            </Link>
-          ))}
-        </Box>
+        <Typography fontSize={48}>DuduDex</Typography>
 
         <IconButton onClick={toggleColorMode}>
           <IconComponent
-            icon={colorMode === 'dark' ? EIcons.DARK_MODE : EIcons.LIGHT_MODE}
+            icon={
+              currentColorMode === 'dark' ? EIcons.DARK_MODE : EIcons.LIGHT_MODE
+            }
           />
         </IconButton>
       </Toolbar>

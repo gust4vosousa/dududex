@@ -3,7 +3,7 @@ import { ERequestStatus } from '../../@types/RequestStatus.types'
 import { IPokemonState } from './pokemonSlice.types'
 import { fetchPokemonById, fetchPokemonByName } from './pokemonThunks'
 
-const POKEMON_INITIAL_STATE: IPokemonState = { status: ERequestStatus.waiting }
+const POKEMON_INITIAL_STATE: IPokemonState = { status: ERequestStatus.WAITING }
 
 export const pokemonSlice = createSlice({
   name: 'pokemon',
@@ -12,23 +12,23 @@ export const pokemonSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchPokemonByName.fulfilled, (state, action) => {
       state.data = action.payload
-      state.status = ERequestStatus.success
+      state.status = ERequestStatus.SUCCESS
     })
     builder.addCase(fetchPokemonByName.pending, (state) => {
-      state.status = ERequestStatus.busy
+      state.status = ERequestStatus.BUSY
     })
     builder.addCase(fetchPokemonByName.rejected, (state) => {
-      state.status = ERequestStatus.failure
+      state.status = ERequestStatus.FAILURE
     })
     builder.addCase(fetchPokemonById.fulfilled, (state, action) => {
       state.data = action.payload
-      state.status = ERequestStatus.success
+      state.status = ERequestStatus.SUCCESS
     })
     builder.addCase(fetchPokemonById.pending, (state) => {
-      state.status = ERequestStatus.busy
+      state.status = ERequestStatus.BUSY
     })
     builder.addCase(fetchPokemonById.rejected, (state) => {
-      state.status = ERequestStatus.failure
+      state.status = ERequestStatus.FAILURE
     })
   },
 })

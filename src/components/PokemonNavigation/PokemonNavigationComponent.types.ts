@@ -1,8 +1,11 @@
+import { ISelectOption } from '../SelectPokemon/SelectPokemonComponent.types'
+
 export enum ENavigationModes {
-  previous = 'previous',
-  next = 'next',
+  PREVIOUS = 'previous',
+  NEXT = 'next',
 }
 
 export interface IPokemonNavigationProps {
-  currentPokemonId: number
+  currentSearch: ISelectOption
+  onPokemonSearch: (pokemon: ISelectOption) => void
 }

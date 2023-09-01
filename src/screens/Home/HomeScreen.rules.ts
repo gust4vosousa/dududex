@@ -1,6 +1,8 @@
-import { useCallback, useEffect, useMemo } from 'react'
-import { EPokedexes, EType } from '../../@types/Entities.types'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { ERequestStatus } from '../../@types/RequestStatus.types'
+import { EPokedexes } from '../../@types/entities/Pokedex/PokedexEntity.types'
+import { EPokemonTypes } from '../../@types/entities/PokemonTypes/PokemonTypesEntity.types'
+import { ISelectOption } from '../../components/SelectPokemon/SelectPokemonComponent.types'
 import {
   selectPokedexRequestStatus,
   selectPokemonList,
@@ -10,7 +12,6 @@ import {
   selectPokemonData,
   selectPokemonRequestStatus,
 } from '../../store/pokemon/pokemonSelectors'
-import { TPokemonListItem } from '../../store/pokemon/pokemonSlice.types'
 import { fetchPokemonById } from '../../store/pokemon/pokemonThunks'
 import { useAppDispatch, useAppSelector } from '../../store/store'
 
@@ -22,27 +23,29 @@ export const useHomeScreenRules = () => {
   const pokedexRequestStatus = useAppSelector(selectPokedexRequestStatus)
   const pokemonRequestStatus = useAppSelector(selectPokemonRequestStatus)
 
+  const [currentSearch, setCurrentSearch] = useState<ISelectOption | null>(null)
+
   const isPokedexBusy = useMemo<boolean>(
-    () => pokedexRequestStatus === ERequestStatus.busy,
+    () => pokedexRequestStatus === ERequestStatus.BUSY,
     [pokedexRequestStatus]
   )
 
   const isPokemonBusy = useMemo<boolean>(
-    () => pokemonRequestStatus === ERequestStatus.busy,
+    () => pokemonRequestStatus === ERequestStatus.BUSY,
     [pokemonRequestStatus]
   )
 
-  const pokemonTypes = useMemo<EType[]>(
+  const pokemonTypes = useMemo<EPokemonTypes[]>(
     () =>
-      pokemonData?.types.map((pokemonType) => pokemonType.type.name as EType) ||
-      [],
+      pokemonData?.types.map(({ type }) => type.name as EPokemonTypes) || [],
     [pokemonData?.types]
   )
 
   const onPokemonSearch = useCallback(
-    (pokemon: TPokemonListItem | null) => {
+    (pokemon: ISelectOption | null) => {
       if (pokemon) {
         dispatch(fetchPokemonById(pokemon.id))
+        setCurrentSearch(pokemon)
         return
       }
     },
@@ -54,6 +57,7 @@ export const useHomeScreenRules = () => {
   }, [dispatch])
 
   return {
+    currentSearch,
     isPokedexBusy,
     isPokemonBusy,
     onPokemonSearch,

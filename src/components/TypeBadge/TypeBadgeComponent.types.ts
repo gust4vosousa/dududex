@@ -1,11 +1,11 @@
-import { EType } from '../../@types/Entities.types';
+import { EPokemonTypes } from '../../@types/entities/PokemonTypes/PokemonTypesEntity.types'
 
 export interface ITypeBadgeProps {
-  types: EType[];
+  types: EPokemonTypes[]
 }
 
 export interface ITypeBadgeStyles {
-  color: string;
-  isFirst: boolean;
-  isMonoType: boolean;
+  color: string
+  isFirst: boolean
+  isMonoType: boolean
 }

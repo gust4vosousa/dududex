@@ -2,9 +2,9 @@ import { createContext, useContext } from 'react'
 import { IColorModeContext } from './ColorModeContext.types'
 
 export const ColorModeContext = createContext<IColorModeContext>({
-  colorMode: 'dark',
-  toggleColorMode: () => {},
+  currentColorMode: 'dark',
+  toggleColorMode: () => null,
 })
 
-export const useColorMode = (): IColorModeContext =>
+export const useColorModeContext = (): IColorModeContext =>
   useContext(ColorModeContext)

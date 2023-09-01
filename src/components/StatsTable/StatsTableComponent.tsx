@@ -1,34 +1,37 @@
-import { Box } from '@mui/material';
-import { getStatColorUtil } from '../../utils/color/colorUtils';
-import { formatStatNameUtil } from '../../utils/formatUtils';
+import { Box } from '@mui/material'
+import { statAdapter } from '../../adapters/Stats/statAdapter'
+import { IAdaptedStat } from '../../adapters/Stats/statAdapter.types'
+import { useColor } from '../../hooks/useColor/useColorHook'
+import { formatStatNameUtil } from '../../utils/formatUtils'
 import {
   StatBar,
   StatBarContainer,
   StatLabel,
-  StatsTableContainer
-} from './StatsTableComponent.styles';
-import { EStatNames, IStatsTableProps } from './StatsTableComponent.types';
+  StatsTableContainer,
+} from './StatsTableComponent.styles'
+import { IStatsTableProps } from './StatsTableComponent.types'
 
 export const StatsTableComponent: React.FC<IStatsTableProps> = ({
-  statsList
+  statsList,
 }) => {
+  const { getStatColor } = useColor()
+
+  const adaptedStats: IAdaptedStat[] = statsList.map((stat) =>
+    statAdapter(stat)
+  )
+
   return (
     <StatsTableContainer>
       <Box fontSize={32} textAlign='center'>
         Stats
       </Box>
-      {statsList.map((stat, index) => (
+      {adaptedStats.map(({ name, value }, index) => (
         <StatBarContainer key={index}>
-          <StatLabel type='name'>
-            {formatStatNameUtil(stat.stat.name as EStatNames)}
-          </StatLabel>
-          <StatLabel type='value'>{stat.base_stat}</StatLabel>
-          <StatBar
-            value={stat.base_stat}
-            color={getStatColorUtil(stat.base_stat)}
-          />
+          <StatLabel type='name'>{formatStatNameUtil(name)}</StatLabel>
+          <StatLabel type='value'>{value}</StatLabel>
+          <StatBar value={value} color={getStatColor(value)} />
         </StatBarContainer>
       ))}
     </StatsTableContainer>
-  );
-};
+  )
+}

@@ -1,9 +1,9 @@
-import { PokemonSprites } from 'pokenode-ts';
+import { PokemonSprites } from 'pokenode-ts'
 
 export enum ESpriteModes {
-  front = 'front',
-  back = 'back'
+  FRONT = 'front',
+  BACK = 'back',
 }
 export interface ISpriteProps {
-  sprites: PokemonSprites;
+  sprites: PokemonSprites
 }

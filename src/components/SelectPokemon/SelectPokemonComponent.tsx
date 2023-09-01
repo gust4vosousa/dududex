@@ -11,6 +11,7 @@ export const SelectComponent: React.FC<ISelectProps> = ({
   loading,
   onChange,
   options,
+  currentSearch,
 }) => (
   <Autocomplete
     disabled={loading}
@@ -31,5 +32,6 @@ export const SelectComponent: React.FC<ISelectProps> = ({
         placeholder={label}
       />
     )}
+    value={currentSearch}
   />
 )

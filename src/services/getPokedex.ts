@@ -1,5 +1,5 @@
 import { GameClient } from 'pokenode-ts'
-import { EPokedexes } from '../@types/Entities.types'
+import { EPokedexes } from '../@types/entities/Pokedex/PokedexEntity.types'
 
 const httpClient = new GameClient()
 

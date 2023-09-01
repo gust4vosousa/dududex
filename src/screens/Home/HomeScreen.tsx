@@ -13,6 +13,7 @@ import { useHomeScreenRules } from './HomeScreen.rules'
 
 export const HomeScreen: React.FC = () => {
   const {
+    currentSearch,
     isPokedexBusy,
     isPokemonBusy,
     onPokemonSearch,
@@ -26,6 +27,7 @@ export const HomeScreen: React.FC = () => {
       <Box style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
         <Card style={{ padding: 16 }}>
           <SelectComponent
+            currentSearch={currentSearch}
             options={pokemonList}
             label='Pokémon'
             loading={isPokedexBusy}
@@ -34,53 +36,71 @@ export const HomeScreen: React.FC = () => {
         </Card>
 
         <Card style={{ padding: 16 }}>
-          {isPokemonBusy && <CircularProgress size={50} color='inherit' />}
+          <Grid container spacing={1}>
+            <Grid
+              item
+              xs={12}
+              style={{ display: 'flex', justifyContent: 'center' }}
+            >
+              {isPokemonBusy && <CircularProgress size={50} color='inherit' />}
 
-          {!pokemonData && !isPokemonBusy && (
-            <Fragment>
-              <IconComponent icon={EIcons.WARNING} />
-              {
-                'Nothing to show yet. Please, select a Pokémon to display its information'
-              }
-            </Fragment>
-          )}
-
-          {pokemonData && !isPokemonBusy && (
-            <Grid container spacing={1}>
-              <Grid item xs={12}>
-                <PokemonNavigationComponent currentPokemonId={pokemonData.id} />
-              </Grid>
-
-              <Grid
-                item
-                xs={12}
-                md={6}
-                style={{
-                  alignItems: 'center',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 8,
-                }}
-              >
-                <TypeBadgeComponent types={pokemonTypes} />
-                <SpriteComponent sprites={pokemonData.sprites} />
-              </Grid>
-
-              <Grid
-                item
-                xs={12}
-                md={6}
-                style={{
-                  alignItems: 'center',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 8,
-                }}
-              >
-                <StatsTableComponent statsList={pokemonData.stats} />
-              </Grid>
+              {!pokemonData && !isPokemonBusy && (
+                <Box
+                  style={{
+                    alignItems: 'center',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 8,
+                    textAlign: 'center',
+                  }}
+                >
+                  <IconComponent fontSize='large' icon={EIcons.WARNING} />
+                  Nothing to show yet. Please, select a Pokémon to display its
+                  information
+                </Box>
+              )}
             </Grid>
-          )}
+
+            {currentSearch && pokemonData && !isPokemonBusy && (
+              <Fragment>
+                <Grid item xs={12}>
+                  <PokemonNavigationComponent
+                    currentSearch={currentSearch}
+                    onPokemonSearch={onPokemonSearch}
+                  />
+                </Grid>
+
+                <Grid
+                  item
+                  xs={12}
+                  md={6}
+                  style={{
+                    alignItems: 'center',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 8,
+                  }}
+                >
+                  <TypeBadgeComponent types={pokemonTypes} />
+                  <SpriteComponent sprites={pokemonData.sprites} />
+                </Grid>
+
+                <Grid
+                  item
+                  xs={12}
+                  md={6}
+                  style={{
+                    alignItems: 'center',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 8,
+                  }}
+                >
+                  <StatsTableComponent statsList={pokemonData.stats} />
+                </Grid>
+              </Fragment>
+            )}
+          </Grid>
         </Card>
       </Box>
     </ScreenProvider>

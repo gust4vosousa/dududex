@@ -1,4 +1,6 @@
-export interface IIconProps {
+import { IconProps } from '@mui/material'
+
+export interface IIconProps extends IconProps {
   icon: EIcons
 }
 
@@ -9,6 +11,9 @@ export enum EIcons {
   DARK_MODE = 'dark_mode',
   HOME = 'home',
   LIGHT_MODE = 'light_mode',
+  MENU = 'menu',
   SEARCH = 'search',
+  SHINY = 'auto_awesome',
+  SWAP = 'swap_horiz',
   WARNING = 'warning',
 }

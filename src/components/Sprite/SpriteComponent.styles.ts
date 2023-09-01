@@ -1,5 +1,5 @@
-import { Box, styled } from '@mui/material';
-import { colors } from '../../theme/colors';
+import { Box, styled } from '@mui/material'
+import { colors } from '../../theme/colors'
 
 export const SpriteContainer = styled(Box)({
   display: 'flex',
@@ -7,8 +7,8 @@ export const SpriteContainer = styled(Box)({
   justifyContent: 'center',
   alignItems: 'center',
   gap: 16,
-  width: 200
-});
+  width: 200,
+})
 
 export const SpriteWrapper = styled(Box)({
   display: 'flex',
@@ -20,8 +20,8 @@ export const SpriteWrapper = styled(Box)({
   backgroundColor: colors.background.light,
   minHeight: 200,
   minWidth: 200,
-  color: colors.background.dark
-});
+  color: colors.background.dark,
+})
 
 export const OptionsContainer = styled(Box)({
   display: 'flex',
@@ -35,6 +35,6 @@ export const OptionsContainer = styled(Box)({
   cursor: 'pointer',
   '&:hover': {
     backgroundColor: colors.background.light,
-    color: colors.background.dark
-  }
-});
+    color: colors.background.dark,
+  },
+})
