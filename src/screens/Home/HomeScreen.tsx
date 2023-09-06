@@ -1,15 +1,20 @@
 import React from 'react'
 
-import { Box, Card, CircularProgress, Grid } from '@mui/material'
+import { Box, Card, CircularProgress, Grid, Typography } from '@mui/material'
+import { EvolutionComponent } from '../../components/Evolution/EvolutionComponent'
 import { IconComponent } from '../../components/Icon/IconComponent'
 import { EIcons } from '../../components/Icon/IconComponent.types'
-import { PokemonDetailsComponent } from '../../components/PokemonDetails/PokemonDetailsComponent'
 import { SelectComponent } from '../../components/SelectPokemon/SelectPokemonComponent'
+import { SpriteComponent } from '../../components/Sprite/SpriteComponent'
+import { StatsTableComponent } from '../../components/StatsTable/StatsTableComponent'
+import { TypeBadgeComponent } from '../../components/TypeBadge/TypeBadgeComponent'
 import { ScreenProvider } from '../../providers/Screen/ScreenProvider'
+import { formatPokemonEntryUtil } from '../../utils/formatUtils'
 import { useHomeScreenRules } from './HomeScreen.rules'
 
 export const HomeScreen: React.FC = () => {
   const {
+    abilities,
     currentSearch,
     evolutionChainData,
     isPokedexBusy,
@@ -17,6 +22,7 @@ export const HomeScreen: React.FC = () => {
     onPokemonSearch,
     pokemonData,
     pokemonList,
+    types,
   } = useHomeScreenRules()
 
   return (
@@ -60,11 +66,53 @@ export const HomeScreen: React.FC = () => {
 
             {pokemonData && !isPokemonBusy && (
               <Grid item>
-                <PokemonDetailsComponent
-                  evolutionChain={evolutionChainData!}
-                  onPokemonSearch={onPokemonSearch}
-                  pokemon={pokemonData}
-                />
+                <Grid container spacing={2}>
+                  <Grid
+                    item
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 16,
+                    }}
+                  >
+                    <SpriteComponent sprites={pokemonData.sprites} />
+                  </Grid>
+                  <Grid
+                    item
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 16,
+                    }}
+                  >
+                    <Typography fontSize={32} fontWeight='bold'>
+                      {formatPokemonEntryUtil({
+                        id: pokemonData.id,
+                        label: pokemonData.name,
+                      })}
+                    </Typography>
+                    <TypeBadgeComponent types={types!} />
+                    <Box>
+                      <Typography fontSize={24} fontWeight='bold'>
+                        Abilities
+                      </Typography>
+
+                      {abilities!.map((ability) => (
+                        <Typography
+                          fontSize={18}
+                          key={ability.name}
+                        >{`• ${ability.name}`}</Typography>
+                      ))}
+                    </Box>
+                    <EvolutionComponent
+                      evolutionChain={evolutionChainData!}
+                      onPokemonSearch={onPokemonSearch}
+                    />
+                  </Grid>
+                  <Grid item>
+                    <StatsTableComponent statsList={pokemonData.stats} />
+                  </Grid>
+                </Grid>
               </Grid>
             )}
           </Grid>

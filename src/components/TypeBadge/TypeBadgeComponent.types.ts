@@ -5,7 +5,6 @@ export interface ITypeBadgeProps {
 }
 
 export interface ITypeBadgeStyles {
-  color: string
   isFirst: boolean
   isMonoType: boolean
 }

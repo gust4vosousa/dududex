@@ -32,6 +32,7 @@ export const StatsTableComponent: React.FC<IStatsTableProps> = ({
           {adaptedStats.map(({ name, value }) => (
             <TableRow key={name}>
               <TableCell>{formatStatNameUtil(name)}</TableCell>
+              <TableCell> {value}</TableCell>
               <TableCell>
                 <Box
                   style={{
@@ -39,7 +40,6 @@ export const StatsTableComponent: React.FC<IStatsTableProps> = ({
                     gap: 8,
                   }}
                 >
-                  {value}
                   <StyledStatBar value={value} color={getStatColor(value)} />
                 </Box>
               </TableCell>

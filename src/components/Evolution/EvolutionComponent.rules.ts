@@ -49,7 +49,6 @@ export const useEvolutionComponentRules = ({
   )
 
   useEffect(() => {
-    setEvolutionLine([])
     const evolutionNames = extractEvolution(evolutionChain.chain)
 
     evolutionNames.forEach(async (name) => {

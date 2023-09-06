@@ -2,9 +2,8 @@ import { Box, styled } from '@mui/material'
 import { ITypeBadgeStyles } from './TypeBadgeComponent.types'
 
 export const StyledTypeBadge = styled(Box)<ITypeBadgeStyles>(
-  ({ color, isFirst, isMonoType }) => ({
+  ({ isFirst, isMonoType }) => ({
     alignItems: 'center',
-    backgroundColor: color,
     borderRadius: isMonoType ? '4px' : isFirst ? '4px 0 0 4px' : '0 4px 4px 0',
     color: 'white',
     display: 'flex',

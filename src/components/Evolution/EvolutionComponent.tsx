@@ -24,7 +24,7 @@ export const EvolutionComponent: React.FC<IEvolutionProps> = (props) => {
         >
           <img alt={`${name} sprite`} src={spriteUrl} width='40px' />
           <Typography fontSize={18}>
-            {`• ${firstLetterUpperCaseUtil(name)}`}
+            {firstLetterUpperCaseUtil(name)}
           </Typography>
         </Link>
       ))}

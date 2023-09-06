@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { ERequestStatus } from '../../@types/RequestStatus.types'
 import { EPokedexes } from '../../@types/entities/Pokedex/PokedexEntity.types'
+import { EPokemonTypes } from '../../@types/entities/Pokemon/Types/PokemonTypesEntity.types'
+import { abilityAdapter } from '../../adapters/Ability/AbilityAdapter'
 import { ISelectOption } from '../../components/SelectPokemon/SelectPokemonComponent.types'
 import {
   selectPokedexRequestStatus,
@@ -38,6 +40,16 @@ export const useHomeScreenRules = () => {
     [pokemonRequestStatus]
   )
 
+  const { abilities, types } = useMemo(
+    () => ({
+      abilities: pokemonData?.abilities.map((ability) =>
+        abilityAdapter(ability)
+      ),
+      types: pokemonData?.types.map(({ type }) => type.name as EPokemonTypes),
+    }),
+    [pokemonData?.abilities, pokemonData?.types]
+  )
+
   const onPokemonSearch = useCallback(
     (pokemon: ISelectOption | null) => {
       if (pokemon) {
@@ -54,6 +66,7 @@ export const useHomeScreenRules = () => {
   }, [dispatch])
 
   return {
+    abilities,
     currentSearch,
     evolutionChainData,
     isPokedexBusy,
@@ -62,5 +75,6 @@ export const useHomeScreenRules = () => {
     pokemonData,
     pokemonList,
     speciesData,
+    types,
   }
 }
