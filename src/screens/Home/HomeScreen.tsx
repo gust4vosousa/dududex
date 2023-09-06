@@ -17,7 +17,6 @@ export const HomeScreen: React.FC = () => {
     onPokemonSearch,
     pokemonData,
     pokemonList,
-    speciesData,
   } = useHomeScreenRules()
 
   return (
@@ -60,12 +59,13 @@ export const HomeScreen: React.FC = () => {
             </Grid>
 
             {pokemonData && !isPokemonBusy && (
-              <PokemonDetailsComponent
-                evolutionChain={evolutionChainData!}
-                onPokemonSearch={onPokemonSearch}
-                pokemon={pokemonData}
-                species={speciesData!}
-              />
+              <Grid item>
+                <PokemonDetailsComponent
+                  evolutionChain={evolutionChainData!}
+                  onPokemonSearch={onPokemonSearch}
+                  pokemon={pokemonData}
+                />
+              </Grid>
             )}
           </Grid>
         </Card>

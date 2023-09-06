@@ -1,14 +1,16 @@
-import { Box } from '@mui/material'
+import {
+  Box,
+  Table,
+  TableBody,
+  TableCell,
+  TableRow,
+  Typography,
+} from '@mui/material'
 import { statAdapter } from '../../adapters/Stats/statAdapter'
 import { IAdaptedStat } from '../../adapters/Stats/statAdapter.types'
 import { useColor } from '../../hooks/useColor/useColorHook'
 import { formatStatNameUtil } from '../../utils/formatUtils'
-import {
-  StatBar,
-  StatBarContainer,
-  StatLabel,
-  StatsTableContainer,
-} from './StatsTableComponent.styles'
+import { StyledStatBar } from './StatsTableComponent.styles'
 import { IStatsTableProps } from './StatsTableComponent.types'
 
 export const StatsTableComponent: React.FC<IStatsTableProps> = ({
@@ -21,17 +23,30 @@ export const StatsTableComponent: React.FC<IStatsTableProps> = ({
   )
 
   return (
-    <StatsTableContainer>
-      <Box fontSize={32} textAlign='center'>
+    <Box>
+      <Typography fontSize={24} fontWeight='bold'>
         Stats
-      </Box>
-      {adaptedStats.map(({ name, value }) => (
-        <StatBarContainer key={name}>
-          <StatLabel type='name'>{formatStatNameUtil(name)}</StatLabel>
-          <StatLabel type='value'>{value}</StatLabel>
-          <StatBar value={value} color={getStatColor(value)} />
-        </StatBarContainer>
-      ))}
-    </StatsTableContainer>
+      </Typography>
+      <Table>
+        <TableBody>
+          {adaptedStats.map(({ name, value }) => (
+            <TableRow key={name}>
+              <TableCell>{formatStatNameUtil(name)}</TableCell>
+              <TableCell>
+                <Box
+                  style={{
+                    display: 'flex',
+                    gap: 8,
+                  }}
+                >
+                  {value}
+                  <StyledStatBar value={value} color={getStatColor(value)} />
+                </Box>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </Box>
   )
 }

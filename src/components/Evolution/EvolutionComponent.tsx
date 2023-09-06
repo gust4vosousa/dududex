@@ -8,7 +8,9 @@ export const EvolutionComponent: React.FC<IEvolutionProps> = (props) => {
 
   return (
     <Box>
-      <Typography fontSize={24}>Evolutions</Typography>
+      <Typography fontSize={24} fontWeight='bold'>
+        Evolutions
+      </Typography>
       {evolutionLine.map(({ name, spriteUrl }) => (
         <Link
           key={name}
