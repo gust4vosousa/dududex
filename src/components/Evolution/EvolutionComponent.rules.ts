@@ -22,9 +22,9 @@ export const useEvolutionComponentRules = ({
     }
   }, [])
 
-  const extractEvolution = useCallback((chain: ChainLink) => {
-    const currentEvolution: string[] = [chain.species.name]
-    const nextEvolutions: string[] = chain.evolves_to.flatMap((evolution) =>
+  const extractEvolution = useCallback((chainLink: ChainLink) => {
+    const currentEvolution: string[] = [chainLink.species.name]
+    const nextEvolutions: string[] = chainLink.evolves_to.flatMap((evolution) =>
       extractEvolution(evolution)
     )
 
@@ -48,25 +48,24 @@ export const useEvolutionComponentRules = ({
     [onPokemonSearch, pokemonList]
   )
 
-  useEffect(() => {
+  const handleEvolutions = useCallback(() => {
     const evolutionNames = extractEvolution(evolutionChain.chain)
 
-    evolutionNames.forEach(async (name) => {
+    const spritePromises = evolutionNames.map(async (name) => {
       const sprites = await getPokemonSprite(name)
+      return sprites?.front_default ?? ''
+    })
 
-      if (sprites) {
-        const spriteUrl: string = sprites.front_default ?? ''
-
-        setEvolutionLine((prev) => {
-          if (!prev.find((line) => line.name === name)) {
-            return [...prev, { name, spriteUrl }]
-          }
-
-          return prev
-        })
-      }
+    Promise.all(spritePromises).then((urls) => {
+      setEvolutionLine(
+        evolutionNames.map((name, index) => ({ name, spriteUrl: urls[index] }))
+      )
     })
   }, [evolutionChain.chain, extractEvolution, getPokemonSprite])
+
+  useEffect(() => {
+    handleEvolutions()
+  }, [handleEvolutions])
 
   return { evolutionLine, onSelectEvolution }
 }

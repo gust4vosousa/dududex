@@ -39,30 +39,40 @@ export const HomeScreen: React.FC = () => {
         </Card>
 
         <Card style={{ padding: 16 }}>
-          <Grid container spacing={1}>
-            <Grid
-              item
-              xs={12}
-              style={{ display: 'flex', justifyContent: 'center' }}
-            >
-              {isPokemonBusy && <CircularProgress size={50} color='inherit' />}
+          <Grid container spacing={2}>
+            {isPokemonBusy && (
+              <Grid
+                item
+                style={{
+                  alignItems: 'center',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 8,
+                  textAlign: 'center',
+                }}
+                xs={12}
+              >
+                <CircularProgress size={50} color='inherit' />
+              </Grid>
+            )}
 
-              {!pokemonData && !isPokemonBusy && (
-                <Box
-                  style={{
-                    alignItems: 'center',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 8,
-                    textAlign: 'center',
-                  }}
-                >
-                  <IconComponent fontSize='large' icon={EIcons.WARNING} />
-                  Nothing to show yet. Please, select a Pokémon to display its
-                  information
-                </Box>
-              )}
-            </Grid>
+            {!pokemonData && !isPokemonBusy && (
+              <Grid
+                item
+                style={{
+                  alignItems: 'center',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 8,
+                  textAlign: 'center',
+                }}
+                xs={12}
+              >
+                <IconComponent fontSize='large' icon={EIcons.WARNING} />
+                Nothing to show yet. Please, select a Pokémon to display its
+                information
+              </Grid>
+            )}
 
             {pokemonData && !isPokemonBusy && (
               <Grid item>
