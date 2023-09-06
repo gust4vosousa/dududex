@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/dududex/static/js/main.7eccb920.js",
+    "main.js": "/dududex/static/js/main.21f4648d.js",
     "index.html": "/dududex/index.html",
-    "main.7eccb920.js.map": "/dududex/static/js/main.7eccb920.js.map"
+    "main.21f4648d.js.map": "/dududex/static/js/main.21f4648d.js.map"
   },
   "entrypoints": [
-    "static/js/main.7eccb920.js"
+    "static/js/main.21f4648d.js"
   ]
 }
