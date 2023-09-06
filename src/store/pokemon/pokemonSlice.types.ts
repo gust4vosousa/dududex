@@ -1,13 +1,14 @@
-import { Pokemon } from 'pokenode-ts'
+import { EvolutionChain, Pokemon, PokemonSpecies } from 'pokenode-ts'
 import { ERequestStatus } from '../../@types/RequestStatus.types'
 
 export interface IPokemonState {
-  data?: Pokemon
+  evolutionChainData?: EvolutionChain
+  pokemonData?: Pokemon
+  speciesData?: PokemonSpecies
   status: ERequestStatus
 }
 
 export enum EPokemonActionTypes {
-  FETCH_BY_NAME = '@pokemon/fetchByName',
   FETCH_BY_ID = '@pokemon/fetchById',
-  RESET = '@pokemon/reset',
+  FETCH_SPECIES_BY_ID = '@pokemon/fetchSpeciesById',
 }

@@ -1,6 +1,6 @@
 import { Box, styled } from '@mui/material'
 import { Link } from 'react-router-dom'
-import { colors } from '../../theme/colors'
+// import { colors } from '../../theme/colors'
 
 export const NotFoundComponent = styled(Box)({
   display: 'flex',
@@ -18,7 +18,7 @@ export const MessageContainer = styled(Box)({
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: colors.background.main,
+  // backgroundColor: colors.background.main,
   padding: 32,
   borderRadius: 16,
 })

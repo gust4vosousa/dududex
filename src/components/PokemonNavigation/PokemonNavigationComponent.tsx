@@ -41,7 +41,7 @@ export const PokemonNavigationComponent: React.FC<IPokemonNavigationProps> = ({
         item
         xs={12}
         md={4}
-        style={{ display: 'flex', fontSize: 48, justifyContent: 'center' }}
+        style={{ display: 'flex', fontSize: 32, justifyContent: 'center' }}
       >
         {currentPokemon && formatPokemonEntryUtil(currentPokemon)}
       </Grid>

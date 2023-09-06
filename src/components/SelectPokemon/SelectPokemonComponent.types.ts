@@ -1,9 +1,9 @@
 export interface ISelectProps {
-  options: ISelectOption[]
+  currentSearch: ISelectOption | null
   label?: string
   loading: boolean
   onChange: (value: ISelectOption | null) => void
-  currentSearch: ISelectOption | null
+  options: ISelectOption[]
 }
 
 export interface ISelectOption {

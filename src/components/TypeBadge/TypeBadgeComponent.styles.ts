@@ -5,7 +5,7 @@ export const StyledTypeBadge = styled(Box)<ITypeBadgeStyles>(
   ({ color, isFirst, isMonoType }) => ({
     alignItems: 'center',
     backgroundColor: color,
-    borderRadius: isMonoType ? '8px' : isFirst ? '8px 0 0 8px' : '0 8px 8px 0',
+    borderRadius: isMonoType ? '4px' : isFirst ? '4px 0 0 4px' : '0 4px 4px 0',
     color: 'white',
     display: 'flex',
     fontSize: 18,

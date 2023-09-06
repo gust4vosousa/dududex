@@ -1,19 +1,36 @@
 // import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 // import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
-import { Button, Typography } from '@mui/material'
+import { Box, Button, Card, Typography, useTheme } from '@mui/material'
 import { IconComponent } from '../Icon/IconComponent'
 import { EIcons } from '../Icon/IconComponent.types'
 import { useSpriteComponentRules } from './SpriteComponent.rules'
-import { SpriteContainer, SpriteWrapper } from './SpriteComponent.styles'
 import { ISpriteProps } from './SpriteComponent.types'
 
 export const SpriteComponent: React.FC<ISpriteProps> = (props) => {
+  const { palette } = useTheme()
   const { currentSprite, isBackSprite, isShiny, setIsBackSprite, setIsShiny } =
     useSpriteComponentRules(props)
 
   return (
-    <SpriteContainer>
-      <SpriteWrapper>
+    <Box
+      style={{
+        alignItems: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 16,
+        justifyContent: 'center',
+        width: 200,
+      }}
+    >
+      <Card
+        elevation={12}
+        style={{
+          backgroundColor: palette.divider,
+          border: `2px solid`,
+          minHeight: 200,
+          minWidth: 200,
+        }}
+      >
         {currentSprite ? (
           <img
             src={currentSprite}
@@ -24,33 +41,20 @@ export const SpriteComponent: React.FC<ISpriteProps> = (props) => {
         ) : (
           <Typography fontWeight={600}>{`No image available :(`}</Typography>
         )}
-      </SpriteWrapper>
+      </Card>
 
-      <Button
-        onClick={() => setIsBackSprite(!isBackSprite)}
-        style={{
-          minWidth: '70%',
-          display: 'flex',
-          justifyContent: 'space-evenly',
-        }}
-        variant='contained'
-      >
-        {isBackSprite ? 'Back' : 'Front'}
-        <IconComponent icon={EIcons.SWAP} />
-      </Button>
+      <Box style={{ display: 'flex', gap: 16 }}>
+        <Button
+          onClick={() => setIsBackSprite(!isBackSprite)}
+          variant='contained'
+        >
+          <IconComponent icon={EIcons.SWAP} />
+        </Button>
 
-      <Button
-        onClick={() => setIsShiny(!isShiny)}
-        style={{
-          minWidth: '70%',
-          display: 'flex',
-          justifyContent: 'space-evenly',
-        }}
-        variant='contained'
-      >
-        {isShiny ? 'Shiny' : 'Regular'}
-        <IconComponent icon={EIcons.SHINY} />
-      </Button>
-    </SpriteContainer>
+        <Button onClick={() => setIsShiny(!isShiny)} variant='contained'>
+          <IconComponent icon={EIcons.SHINY} />
+        </Button>
+      </Box>
+    </Box>
   )
 }

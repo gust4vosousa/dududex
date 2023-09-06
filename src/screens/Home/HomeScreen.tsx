@@ -1,25 +1,23 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 
 import { Box, Card, CircularProgress, Grid } from '@mui/material'
 import { IconComponent } from '../../components/Icon/IconComponent'
 import { EIcons } from '../../components/Icon/IconComponent.types'
-import { PokemonNavigationComponent } from '../../components/PokemonNavigation/PokemonNavigationComponent'
+import { PokemonDetailsComponent } from '../../components/PokemonDetails/PokemonDetailsComponent'
 import { SelectComponent } from '../../components/SelectPokemon/SelectPokemonComponent'
-import { SpriteComponent } from '../../components/Sprite/SpriteComponent'
-import { StatsTableComponent } from '../../components/StatsTable/StatsTableComponent'
-import { TypeBadgeComponent } from '../../components/TypeBadge/TypeBadgeComponent'
 import { ScreenProvider } from '../../providers/Screen/ScreenProvider'
 import { useHomeScreenRules } from './HomeScreen.rules'
 
 export const HomeScreen: React.FC = () => {
   const {
     currentSearch,
+    evolutionChainData,
     isPokedexBusy,
     isPokemonBusy,
     onPokemonSearch,
     pokemonData,
     pokemonList,
-    pokemonTypes,
+    speciesData,
   } = useHomeScreenRules()
 
   return (
@@ -61,44 +59,13 @@ export const HomeScreen: React.FC = () => {
               )}
             </Grid>
 
-            {currentSearch && pokemonData && !isPokemonBusy && (
-              <Fragment>
-                <Grid item xs={12}>
-                  <PokemonNavigationComponent
-                    currentSearch={currentSearch}
-                    onPokemonSearch={onPokemonSearch}
-                  />
-                </Grid>
-
-                <Grid
-                  item
-                  xs={12}
-                  md={6}
-                  style={{
-                    alignItems: 'center',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 8,
-                  }}
-                >
-                  <TypeBadgeComponent types={pokemonTypes} />
-                  <SpriteComponent sprites={pokemonData.sprites} />
-                </Grid>
-
-                <Grid
-                  item
-                  xs={12}
-                  md={6}
-                  style={{
-                    alignItems: 'center',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 8,
-                  }}
-                >
-                  <StatsTableComponent statsList={pokemonData.stats} />
-                </Grid>
-              </Fragment>
+            {pokemonData && !isPokemonBusy && (
+              <PokemonDetailsComponent
+                evolutionChain={evolutionChainData!}
+                onPokemonSearch={onPokemonSearch}
+                pokemon={pokemonData}
+                species={speciesData!}
+              />
             )}
           </Grid>
         </Card>

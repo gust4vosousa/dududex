@@ -25,8 +25,8 @@ export const StatsTableComponent: React.FC<IStatsTableProps> = ({
       <Box fontSize={32} textAlign='center'>
         Stats
       </Box>
-      {adaptedStats.map(({ name, value }, index) => (
-        <StatBarContainer key={index}>
+      {adaptedStats.map(({ name, value }) => (
+        <StatBarContainer key={name}>
           <StatLabel type='name'>{formatStatNameUtil(name)}</StatLabel>
           <StatLabel type='value'>{value}</StatLabel>
           <StatBar value={value} color={getStatColor(value)} />

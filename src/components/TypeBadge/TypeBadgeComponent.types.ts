@@ -1,4 +1,4 @@
-import { EPokemonTypes } from '../../@types/entities/PokemonTypes/PokemonTypesEntity.types'
+import { EPokemonTypes } from '../../@types/entities/Pokemon/Types/PokemonTypesEntity.types'
 
 export interface ITypeBadgeProps {
   types: EPokemonTypes[]

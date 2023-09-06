@@ -18,7 +18,7 @@ export const TypeBadgeComponent: React.FC<ITypeBadgeProps> = ({ types }) => {
     >
       {types.map((type, index) => (
         <StyledTypeBadge
-          key={index}
+          key={type}
           color={getTypeColor(type)}
           isFirst={index === 0}
           isMonoType={types.length <= 1}

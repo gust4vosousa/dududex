@@ -17,7 +17,7 @@ export const DrawerComponent: React.FC = () => {
     <Drawer anchor='left' open={isDrawerOpen} onClose={toggleDrawerOpen}>
       <List>
         {menuItems.map(({ icon, path, title }) => (
-          <ListItem disablePadding>
+          <ListItem disablePadding key={title}>
             <ListItemButton onClick={() => handleOnClick(path)}>
               <ListItemIcon>
                 <IconComponent icon={icon} />

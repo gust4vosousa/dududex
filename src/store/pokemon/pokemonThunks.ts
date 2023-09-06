@@ -1,13 +1,25 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { getPokemonById, getPokemonByName } from '../../services/getPokemon'
+import {
+  getEvolutionChain,
+  getPokemonById,
+  getPokemonSpeciesById,
+} from '../../services/getPokemon'
 import { EPokemonActionTypes } from './pokemonSlice.types'
-
-export const fetchPokemonByName = createAsyncThunk(
-  EPokemonActionTypes.FETCH_BY_NAME,
-  async (pokemonName: string) => await getPokemonByName(pokemonName)
-)
 
 export const fetchPokemonById = createAsyncThunk(
   EPokemonActionTypes.FETCH_BY_ID,
-  async (pokemonId: number) => await getPokemonById(pokemonId)
+  async (pokemonId: number) => {
+    try {
+      const pokemon = await getPokemonById(pokemonId)
+      const species = await getPokemonSpeciesById(pokemonId)
+      const evolutionChain = await getEvolutionChain(
+        species.evolution_chain.url
+      )
+
+      return { evolutionChain, pokemon, species }
+    } catch (error) {
+      console.log(error)
+      throw error
+    }
+  }
 )

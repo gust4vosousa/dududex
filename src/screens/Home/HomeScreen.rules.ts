@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { ERequestStatus } from '../../@types/RequestStatus.types'
 import { EPokedexes } from '../../@types/entities/Pokedex/PokedexEntity.types'
-import { EPokemonTypes } from '../../@types/entities/PokemonTypes/PokemonTypesEntity.types'
 import { ISelectOption } from '../../components/SelectPokemon/SelectPokemonComponent.types'
 import {
   selectPokedexRequestStatus,
@@ -9,8 +8,10 @@ import {
 } from '../../store/pokedex/pokedexSelectors'
 import { fetchPokedexById } from '../../store/pokedex/pokedexThunks'
 import {
+  selectEvolutionChainData,
   selectPokemonData,
   selectPokemonRequestStatus,
+  selectSpeciesData,
 } from '../../store/pokemon/pokemonSelectors'
 import { fetchPokemonById } from '../../store/pokemon/pokemonThunks'
 import { useAppDispatch, useAppSelector } from '../../store/store'
@@ -18,8 +19,10 @@ import { useAppDispatch, useAppSelector } from '../../store/store'
 export const useHomeScreenRules = () => {
   const dispatch = useAppDispatch()
 
-  const pokemonList = useAppSelector(selectPokemonList)
+  const evolutionChainData = useAppSelector(selectEvolutionChainData)
   const pokemonData = useAppSelector(selectPokemonData)
+  const pokemonList = useAppSelector(selectPokemonList)
+  const speciesData = useAppSelector(selectSpeciesData)
   const pokedexRequestStatus = useAppSelector(selectPokedexRequestStatus)
   const pokemonRequestStatus = useAppSelector(selectPokemonRequestStatus)
 
@@ -33,12 +36,6 @@ export const useHomeScreenRules = () => {
   const isPokemonBusy = useMemo<boolean>(
     () => pokemonRequestStatus === ERequestStatus.BUSY,
     [pokemonRequestStatus]
-  )
-
-  const pokemonTypes = useMemo<EPokemonTypes[]>(
-    () =>
-      pokemonData?.types.map(({ type }) => type.name as EPokemonTypes) || [],
-    [pokemonData?.types]
   )
 
   const onPokemonSearch = useCallback(
@@ -58,11 +55,12 @@ export const useHomeScreenRules = () => {
 
   return {
     currentSearch,
+    evolutionChainData,
     isPokedexBusy,
     isPokemonBusy,
     onPokemonSearch,
     pokemonData,
     pokemonList,
-    pokemonTypes,
+    speciesData,
   }
 }
