@@ -1,7 +1,7 @@
 import { PaletteMode, createTheme } from '@mui/material'
 import { useMemo, useState } from 'react'
-import { IColorModeContext } from './contexts/ColorMode/ColorModeContext.types'
-import { IDrawerContext } from './contexts/Drawer/DrawerContext.types'
+import { IColorModeContext } from './application/contexts/ColorMode/ColorModeContext.types'
+import { IDrawerContext } from './application/contexts/Drawer/DrawerContext.types'
 
 export const useAppRules = () => {
   const [mode, setMode] = useState<PaletteMode>('dark')
@@ -11,9 +11,9 @@ export const useAppRules = () => {
     () => ({
       currentColorMode: mode,
       toggleColorMode: () =>
-        setMode((prev) => (prev === 'dark' ? 'light' : 'dark')),
+        setMode(prev => (prev === 'dark' ? 'light' : 'dark')),
     }),
-    [mode]
+    [mode],
   )
 
   const drawerContextValue = useMemo<IDrawerContext>(
@@ -21,7 +21,7 @@ export const useAppRules = () => {
       isDrawerOpen,
       toggleDrawerOpen: () => setIsDrawerOpen(!isDrawerOpen),
     }),
-    [isDrawerOpen]
+    [isDrawerOpen],
   )
 
   const theme = createTheme({
